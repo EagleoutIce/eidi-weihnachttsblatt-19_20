@@ -1,0 +1,1179 @@
+\errorcontextlines 99999
+\documentclass[table]{sopra-base}
+
+\usepackage{enumitem,mathtools,multicol,tikzducks,tikzsymbols,fontawesome}
+
+\usepackage{sopra-listings}
+\usepackage[nousefa]{sopra-attachments}
+
+\title{Einführung in die Informatik}
+\subtitle[Inoffizielles Weihnachtsblatt - Lösung]{Inoffizielles Weihnachtsblatt - Lösung $\mid$ WiSe 2019/20}
+
+\brief{Inoffizielles Weihnachtsblatt für EidI im WiSe 2019/2020}
+
+\group{EidI Tutorien}
+\authors{Florian Sihler (florian.sihler@uni-ulm.de)}
+\supervisor{Florian Sihler}
+
+\keywords{EidI WiSe-2019/2020 Weihnachtsblatt LaTeX Lösung}
+
+\duedate{2020-01-06}
+
+\def\impmath#1{\textcolor{sob@col@uulm@cs}{\ensuremath{\mathit{#1}}}}
+\long\def\say#1{\glqq{#1}\grqq{}}
+\let\T\texttt
+
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\renewcommand{\arraystretch}{1.25}
+\def\pc{\noexpand\rotatebox[origin=c]{270}{\noexpand\faPaperclip{}}}
+\def\aJava#1{\attachDocumentText{#1}{\pc{} #1}}
+\def\aTask#1#2{\attachDocumentText{#1/#2}{\pc{} \noexpand\detokenize{#2}}}
+
+\newenvironment{solution}{\null\par\noindent\textbf{\textcolor{sob@col@uulm@cs}{Lösung:}}\newline\bgroup\color{black}\slshape\ignorespaces}{\egroup}
+
+% \attachfilesetup{author=Florian Sihler}
+
+\begin{document}
+    
+\maketitle
+
+% too great to miss: https://tex.stackexchange.com/questions/387047/the-duck-pond-showcase-of-tikz-drawn-animals-ducks
+\begin{tikzpicture}[overlay,remember picture]
+    \node at ($(current page.north east)+(-3.75cm,-7.25cm)$) {\begin{tikzpicture}[scale=0.75]
+        \duck[santa=red!80!black, jacket=red!80!gray, tshirt=white,water];
+
+%This prompts the beard%
+\fill[white!80!brown](1.3,1.3) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (1.2,1.15) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.5,1.05) ellipse (0.1 and 0.1);
+\fill[white!80!brown](0.525,0.90) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.525,0.75) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.65,0.65) ellipse (0.14 and 0.14);
+\fill[white!80!brown] (0.75,0.75) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.85,0.85) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.95,0.95) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (1.05,1.05) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (1.15,1.25) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (1,1.20) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.85,1.20) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.75,1.15) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.65,1.10) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.58,1.07) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.42,1.46) ellipse (0.07 and 0.07);
+\fill[white!80!brown] (0.52,1.45) ellipse (0.07 and 0.07);
+\fill[white!80!brown] (0.6,1.44) ellipse (0.07 and 0.07);
+\fill[white!80!brown] (0.68,1.40) ellipse (0.07 and 0.07);
+\fill[white!80!brown] (0.76,1.36) ellipse (0.07 and 0.07);
+\fill[white!80!brown] (0.8,1.25) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.85,1.28) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (0.38,1.44) ellipse (0.05 and 0.05);
+\fill[white!80!brown] (1,1.28) ellipse (0.12 and 0.12);
+\fill[white!80!brown] (1.3,1.3) -- (0.5,1.05) -- (0.65,0.65) -- cycle;
+    \end{tikzpicture}};
+\end{tikzpicture}
+
+\begin{center}
+    \vskip-1.25cm\Huge\bfseries Lösung
+\end{center}
+
+\section{Allgemeines}
+
+Dieses Übungsblatt wurde von mir (Florian Sihler) als freiwilliges Übungsangebot für die Tutorienteilnehmer der Veranstaltung \say{Einführung in die Informatik} im Wintersemester 2019/2020 erstellt. Hierbei handelt es sich um die \say{Musterlösungen}, die eine Vorstellung für die Lösung der einzelnen Aufgaben liefern. Ich verwende \say{\T{du}}, sollten Sie sich in dieser Hinsicht angegriffen fühlen, so bitte ich dies aufrichtigst zu entschuldigen.\par{}
+
+Alle Codes die hier gezeigt/erklärt oder angerissen werden, sind der PDF-Datei selbst noch einmal
+angehängt, wobei die diversen Kommilitonen, welche mir bei der Programmierung einige Arbeit abgenommen haben dort jeweils vermerkt sind. Um die Dateien zu öffnen wird ein PDF-Viewer benötigt, welcher Anhänge unterstützt (was für eigentlich alle gängigen zutrifft). Sollte ein Anklicken der jeweiligen Markierung wie diese für \aJava{Test.java} nicht möglich sein, so empfiehlt es sich einen Viewer wie den Adobe Acrobat Reader, Okular, Evince oder Xodo zu verwenden\footnote{Hier wurde mir die Funktionalität bereits bestätigt \Laughey}. 
+
+\begin{solution}
+    In solchen Abschnitten befinden sich die jeweiligen Anmerkungen, Kommentare und Programmausschnitte zur jeweiligen Aufgabe. Abseits weiterer Rechtschreibkorrekturen wurden keine Veränderungen an den Aufgabenstellungen des folgenden Dokuments vorgenommen. Ach ja, alle hier aufgeführten Codes sowie der Quellcode für dieses Dokument befinden sich auch auf Github und können dort somit ebenfalls wiedergefunden werden! Einfach klicken, besternen, oder wie auch immer: \url{https://github.com/EagleoutIce/eidi-weihnachttsblatt-19_20}.
+\end{solution}
+
+%
+%
+% .##.......########.####..######..##.....##.########
+% .##.......##........##..##....##.##.....##....##...
+% .##.......##........##..##.......##.....##....##...
+% .##.......######....##..##.......#########....##...
+% .##.......##........##..##.......##.....##....##...
+% .##.......##........##..##....##.##.....##....##...
+% .########.########.####..######..##.....##....##...
+%
+%
+
+\section{Einfache Aufgaben}
+
+\textit{Dieser Abschnitt enthält eine Ansammlung kleiner Aufgabenstellungen. Sie müssen natürlich nicht in zehn Minuten herunter geschrieben werden. Es gilt auch (und vielleicht vor allem) sich die Zeit zu nehmen das
+Kommentieren von Code zu üben oder sich mit Build-Systemen wie \T{make}\footnote{\url{https://www.gnu.org/software/make/}}, \T{maven}\footnote{\url{https://maven.apache.org/}} oder \T{gradle}\footnote{\url{https://gradle.org/}} vertraut zu machen. Auch kann gern eine andere Programmiersprache versucht, oder das Programm gleich in mehreren implementiert werden. Die Lösungen werden allerdings in Java sein und wer eine esoterische Programmiersprache verwendet ist selbst schuld \Winkey.}\par{}
+
+Es sollten keine Komponenten aus der Java-Bibliothek verwendet werden, die die Aufgabe (drastisch) vereinfachen (so zum Beispiel: \bjava[morekeywords={[2]{GregorianCalendar}},morekeywords={[3]{isLeapYear}}]{Java.util.GregorianCalendar.isLeapYear(int)}). 
+
+\subsection{Schaltjahrprüfer}
+
+\label{sec:leapyear}Schreibe eine Funktion wie \bjava{boolean istSchaltjahr(int jahr)} die herausfindet, ob es sich bei diesem Jahr um ein Schaltjahr handelt. Beachte die genauen Regelungen für ein Schaltjahr: \begin{itemize}[nolistsep]
+    \item Eine Jahreszahl die durch $4$ (vier) ganzzahlig teilbar ist, ist ein Schaltjahr.
+    \item Sogenannte Säkularjahre, das sind Jahre, die ein Jahrhundert abschließen ($1800$, $1900$, \ldots) sind \emph{keine} Schaltjahre
+    \item Außer das Säkularjahr ist durch $400$ ganzzahlig teilbar, dann gilt es doch als Schaltjahr ($1600$, $2000$, \ldots)
+\end{itemize}
+Gerne kannst du die Methode mit einer Eingabe im Terminal verknüpfen!
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{easy}{A21_Schaltjahrpruefer.java}, wobei die einzige relevante Methode \bjava{istSchaltjahr(int)} ist:
+    {\upshape\ijava[linerange={32-40},firstnumber=32]{easy/A21_Schaltjahrpruefer.java}}
+    und der Ablauf der Abfragen entspricht den Bedingungen: \begin{itemize}[nolistsep]
+        \item Ob eine Jahreszahl durch \(4\) ganzzahlig teilbar ist, prüfen wir mittels: \bjava{jahr \% 4:ws:== 0}
+        \item Säkularjahre schließen wir durch den ersten Teil der folgenden \bjava{if}-Bedingung aus: \bjava{jar \% 100:ws:== 0}
+        \item Da die Säkularjahrregel aber alle \(400\) Jahre keine Anwendung findet, fordern wir noch zusätzlich, dass sich das Jahr durch \(400\) nicht ganzzahlig teilen darf mittels: \bjava{jahr \% 400:ws:!= 0}
+    \end{itemize}
+    \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A21_Schaltjahrpruefer} beliebig viele Jahreszahlen durch Leerfelder getrennt angereiht werden, die dann jeweils auf die Eigenschaft \bjava{istSchaltjahr} geprüft werden.
+\end{solution}
+
+\subsection{Primzahlen mit Eratosthenes}
+
+Programmiere einen Primzahlfinder, der das \emph{Sieb des Eratosthenes} verwendet. Es soll möglich sein in der Konsole die maximale Zahl $N$ einzugeben, woraufhin der Primzahlfinder alle Primzahlen von $2$ bis $N$ angibt. Ungültige oder Unsinnige Eingaben wie \say{$-42$}, \say{Hallo}, etc. müssen nicht abgefangen werden.\par{}
+\textit{Hinweis, der Algorithmus geht wie folgt. Zu Beginn gelten alle Zahlen von $2$ bis $N$ als potentielle Primzahlen. Nun wird die kleinste unmarkierte Zahl als Primzahl gespeichert und alle Vielfache dieser Zahl als \say{keine-Primzahl} markiert. Dieser Prozess kann bis zu $N$ durchgeführt werden, in diesem Durchlauf werden dann alle Primzahlen von $2$ bis $N$ gefunden. Man kann allerdings auch schon früher aufhören - hierüber gilt es sich zumindest Gedanken zu machen \Smiley.}
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{easy}{A22_Primzahlfinder.java}, wobei sich alles wichtige in der \T{main}-Methode abspielt. Sei uns also das Array \bjava{prime[N]} gegeben, welches durchweg auf \bjava{true} gesetzt ist. Es genügt beim durchgehen alle Zahlen bis \(\sqrt{N}\)
+    zu betrachten da wir dann (\(\sqrt{N}^2 = N\)) alle möglichen Vielfachen gestrichen haben. Wir gehen also alle Elemente des Arrays von \(1\) bis \(\sqrt{N}\) durch, prüfen ob sie auf \bjava{true} stehen und setzen alle vielfachen des Indizes auf \bjava{false}:
+    {\upshape
+    \begin{java}[firstnumber=35]
+for (int i = 2; i < Math.sqrt(prime.length); i++) {
+    if (prime[i]) {// Ist Primzahl
+        // Markiere alle Vielfachen als "keine Primzahl"
+        for (int j = i; j * i < prime.length; j++) {
+            prime[i * j] = false;
+        }
+    }
+}
+    \end{java}
+    }
+    Anschließend reicht es, über alle Elemente zu iterieren und die Indizes \bjava{i} auszugeben, bei denen \bjava{prime[i]} auf \bjava{true} gesetzt ist.
+\end{solution}
+
+\subsection{Quersummen berechnen}
+
+Schreibe eine Funktion, die einen Integer erhält und die Quersumme von diesem berechnet. Das Programm soll nur für positive Zahlen funktionieren, ungewünschte Eingaben müssen nicht abgefangen werden. \par{}
+\textit{Hinweis: Die Quersumme bezeichnet die Summe der einzelnen Ziffernwerte, so ist die Quersumme von $2042$ gegeben durch: $2+0+4+2 = 8$. Als Übung können auch drei oder mehr verschiedene Verfahren für diese Aufgabe gefunden werden (so zum Beispiel ohne und mit Modulo, \ldots).}
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{easy}{A23_Quersumme.java}, wobei die einzige relevante Methode \bjava{quersummeVon(int)} ist. Hierbei summieren wir die jeweils kleinste Ziffer der Zahl auf (mittels Modulo \(10\)) und teilen die Zahl dann anschließend ganzzahlig durch \(10\) um die kleinst-wertige Ziffer zu verwerfen (die dadurch entstehende Nachkommastelle wird von Java abgeschnitten). Vorweg sei gleich als eine andere Alternative präsentiert: bei der man die Zahl als
+    String interpretiert, dann über die einzelnen Zeichen iteriert und ihre Ziffernwerte aufsummiert.\par{}
+    Die hier referenzierte Lösung läuft wie folgt ab:
+    {\upshape
+    \begin{java}[firstnumber=30]
+static int quersummeVon(int eingabe) {
+    int result = 0;
+    while (eingabe > 0) {
+        result += eingabe % 10;
+        eingabe = eingabe / 10;
+    }
+    return result;
+}
+    \end{java}
+    }
+    \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A23_Quersumme} beliebig viele Zahlen durch Leerfelder getrennt angereiht werden, für die dann jeweils die Quersumme berechnet wird.
+\end{solution}
+
+\subsection{Palindrome}
+
+Schreibe eine Funktion (oder auch zwei verschiedene \Winkey), die bei einer übergebenen Zeichenkette angeben, ob es sich um ein Palindrom handelt. Schreibe dein Programm nun so, dass du beliebig viele Zeichenketten (nacheinander) in der Konsole eingeben kannst und für jedes die Rückmeldung erhältst, ob es sich um ein Palindrom handelt oder nicht.\par{}
+
+\textit{Hinweis: Ein Palindrom ist ein Wort oder ein Satz, der in beide Leserichtungen (also von rechts-nach-links und links-nach-rechts) den selben Laut besitzt. So zum Beispiel: \say{Regallager} oder \say{O Genie, der Herr ehre dein Ego!}. Satzzeichen oder Worttrennungen spielen hierbei (wie das zweite Beispiel zeigt) keine Rolle und werden vernachlässigt.}
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{easy}{A24_Palindrome.java}, wobei wir hier zwei relevante Methoden haben. Zum einen \bjava{istPalindrom(String)} und zum anderen \bjava{parseEingabe(String)}. \par{}
+    Wir betrachten zuerst die Vorbereitung der jeweiligen Eingabe. Da die Aufgabe nicht genau spezifiziert, welche zeichen übernommen werden sollen, einigen wir uns auf die Buchstaben \T{a} bis \T{z} sowie die drei deutschen Sonderzeichen \T{ä}, \T{ö} und \T{ü} (dies lässt sich aber natürlich leicht erweitern). Zuerst wird die Eingabe in Kleinbuchstaben konvertiert, anschließend wird für jedes Zeichen geprüft, ob es für ein Palindrom Relevanz besitzt. Anstelle der Werte der ASCII-Tabelle verwenden wir hier die Zeichen selbst, da Java diese für den Vergleich ohnehin in einen Integer konvertiert und der Quellcode so um einiges lesbarer wird:
+    {\upshape
+    \begin{java}[firstnumber=50]
+static String parseEingabe(String eingabe) {
+    String result = "";
+    eingabe = eingabe.toLowerCase(); // Kleinbuchstaben reichen
+    for (char x : eingabe.toCharArray()) {
+        // Buchstaben check
+        if ((x > 'a' && x < 'z')) // Ist Zeichen
+            result += x;
+        if (x == 'ä' || x == 'ö' || x == 'ü') // Ist Umlaut
+            result += x;
+    }
+    return result;
+}
+    \end{java}
+    }
+    Diese Methode wird nun von \bjava{istPalindrom(String)} verwendet, wobei wir mit dem Ergebnis wie folgt vorgehen:\begin{enumerate}[nolistsep]
+        \item Da bei einer ungeraden Eingabelänge das mittlere Zeichen egal ist, genügt es über die Hälfte der Zeichen zu iterieren.
+        \item Wir vergleichen nun bis zur Hälfte der Eingabe ob das \(i\)-te Zeichen dem \say{\(\text{length}-i - 1\)}-ten entspricht, also beispielsweise das erste Zeichen dem letzten entspricht.
+        \item Sollte dies nicht der Fall sein brechen wir ab und geben \bjava{false} zurück.
+        \item Sind wir an der \say{Mitte} angekommen und alle Buchstaben sind gleich geben wir \bjava{true} zurück, da die Eingabe dann ein Palindrom ist.
+    \end{enumerate}
+    Im Code präsentiert sich dies wie folgt:
+    {\upshape
+    \begin{java}[firstnumber=34]
+static boolean istPalindrom(String eingabe) {
+    eingabe = parseEingabe(eingabe);
+    for (int i = 0; i < eingabe.length() / 2; i++) {
+        if (eingabe.charAt(i) != eingabe.charAt(eingabe.length() - 1 - i))
+            return false;
+    }
+    return true;
+}
+    \end{java}
+    }
+    \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A24_Palindrome} beliebig viele Eingaben durch Leerfelder getrennt angereiht werden, die dann jeweils auf die Palindromeigenschaft geprüft werden. Sätze können in (doppelten) Anführungszeichen (analog zu Java) eingeschlossen werden. Beispiel:
+    \cjava[morekeywords={java}]{java A24_Palindrome "regallAger":ws:"hallo welt":ws:"AN+NA++" }\,.
+\end{solution}
+
+\subsection{Zahlenumrechner}
+
+Schreibe für jede der folgenden Anforderungen eine Funktion, die eine Zahl als Zeichenkette (\bjava{String}) erhält und die entsprechend umgerechnete Zahl als Zeichenkette (\bjava{String}) zurück liefert:
+\begin{multicols}{2}
+    \begin{enumerate}[nolistsep,label=\itshape{\roman*)}]
+        \item Dezimal in Binär (und Umgekehrt)
+        \item Dezimal in Hexadezimal (und Umgekehrt)
+        \item Dezimal in Oktal (und umgekehrt)
+        \item Dezimal in römische Zahlenschrift.
+    \end{enumerate}
+\end{multicols}\vspace*{-0.75\baselineskip}\par
+Die Option für \say{von römischer Zahlen ins Dezimalsystem} ist freiwillig. \textit{Hinweis: Die Darstellung einer Zahl im Binär-, Okal- oder Hexadezimal System erfolgt analog zum Dezimalsystem, wobei für jede Ziffer entweder zwei, acht oder sechzehn Symbole zur Verfügung stehen. Die Wertigkeit ist hierbei für jede Ziffer: \T{Ziffer * Basis\^{}Stelle}. 
+So ist zum Beispiel $42_{10}$: \begin{itemize}[nolistsep]
+    \item im Binärsystem $101010_{2}$, da: $\impmath{1} \cdot 2^5 + \impmath{0} \cdot 2^4 + \impmath{1} \cdot 2^3 + \impmath{0} \cdot 2^2 + \impmath{1} \cdot 2^1 + \impmath{0} \cdot 2^0 = 42_{10}$.
+    \item im Oktalsystem $52_8$, da: $\impmath{5} \cdot 8^1 + \impmath{2} \cdot 8^0 = 42_{10}$.
+    \item im Hexadezimalsystem $2A_{16}$, da: $\impmath{2} \cdot 16^1 + \impmath{10} \cdot 8^0 = 42_{10}$. Hinweis, die Ziffernwerte $10$ bis $15$ werden durch die Buchstaben $A$ bis $F$ gekennzeichnet (so entspricht $A\widehat{=}10,\,B\widehat{=}11,\,\ldots,\,F\widehat{=}15$)
+\end{itemize}
+Das römische System verwendet Zahlzeichen für die Darstellung bestimmter numerischer Werte, so repräsentiert \T{I} eine $1$, \T{V} den Wert $5$, \T{X} den Wert $10$, \T{L} den Wert $50$, \T{C} den Wert $100$, \T{D} den Wert $500$ und \T{M} den Wert $1000$. Die einzelnen Werte der Symbole werden summiert, wobei sie positiv gewertet werden, wenn sie in ihrer Wertigkeit absteigend notiert sind und negativ wenn ein Symbol niederern Wertes vor einem mit höheren Wert steht. So ist: \foreach \i in {1,...,10} {$\i_{10}$ = \rom{\i},~} und $42_{10}$ zum Beispiel: ${X}{V}{I}{I} = \underset{X}{(-10)} + \underset{V}{50} + \underset{I}{1} + \underset{I}{1} = 42_{10}$.
+}
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{easy}{A25_Zahlenumrechner.java}, wobei wir sogar drei relevante Methoden haben. Zum einen \bjava{fromAtoDec(String,int)} weiter \bjava{fromDecToB(String,int)} sowie \bjava{fromDecToRom(String)}. Wir beginnen mit der Konvertierung ins Dezimalsystem wobei wir einfach Schema F in Java übernehmen und den String von Hinten her traversieren:
+    {\upshape
+    \begin{java}[firstnumber=37]
+public static int fromAtoDec(String A, int baseA){
+    int decimal = 0;
+    // Wir Iterieren (von Hinten) über die Zeichen des Strings:
+    char[] arr = A.toUpperCase().toCharArray(); // Damit in HEX egal
+    for (int i = arr.length-1; i >= 0; i--) {// Von Hinten
+        // Prüfe ob "Zahl":
+        int digit = 0 ;
+        if(arr[i] >= '0' && arr[i] <= '9')
+            digit = arr[i] - '0'; // '0' = 0, '1' = 1, ...
+        else if(arr[i] >= 'A' && arr[i] <= 'F')
+            digit = arr[i] - 'A' + 10; // 'A' = 10, 'B' = 11, ....
+        decimal += digit * Math.pow(baseA,arr.length-i-1);// Ziffer * Basis^Stelle
+    }
+    return decimal;
+}
+    \end{java}
+    }
+    Für das Konvertieren von Dezimal zu einer beliebigen Basis machen wir einen Test, ob die
+    römische gewünscht ist. In diesem Fall habe ich eine Konstante definiert und verwende dann
+    folgenden Code für die Konvertierung:
+    {\upshape
+    \begin{java}[firstnumber=59]
+public static String[] roman_chars = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+public static int[] roman_values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+public static String fromDecToRom(int A){
+    // Wir probieren vom höher zum niederwrt. röm. Zeichen alle
+    String result = "";
+    for (int i = 0; i < roman_chars.length; i++) {
+        while(A >= roman_values[i]) { // Zeichen passt :D
+            result += roman_chars[i];
+            A -= roman_values[i]; // Abziehen der Zahl
+        }
+    }
+    return result;
+}
+    \end{java}
+}
+    Die normale Konvertierung gestaltet sich als recht einfach, wir konkatennieren jeweils den ganzzahligen Rest der Division durch die Basis an die Zeichenkette heran. So wie es das Konvertieren durch Division diktiert:
+    {\upshape
+\begin{java}[firstnumber=81,morekeywords={[4]{ROM}}]
+public static String fromDecToB(int A, int baseB){
+    if(baseB == ROM /* = -1 */ ) return fromDecToRom(A);
+    // Teile A sukzessiv durch base B und konkatiniere Reste
+    String result = ""; 
+    int remainder = 0;
+    while(A > 0) {// Es gibt noch was zu teilen
+        remainder = A % baseB;
+        if(remainder >= 10)
+            remainder += -10 + 'A'; // 10 = 'A', 11 = 'B', ...
+        else remainder += '0'; // 0 = '0', 1 = '1', ....
+        result = (char) remainder + result;
+        A = A/baseB; // A /= baseB; Ganzzahlige Division
+    }
+    return result;
+}
+    \end{java}
+    }
+    \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A25_Zahlenumrechnen} beliebig viele Eingaben durch Leerfelder getrennt angereiht werden, die dann jeweils in alle möglichen Basen konvertiert werden. Die Basis der Zahl kann in Java-Notation angegeben werden. So notiert das Präfix \say{\T{0x}} eine Hex- \say{\T{0o}} eine Oktal- und \say{\T{0b}} eine Binärzahl (kein Präfix bedeutet, dass es sich um eine Dezimalzahl handelt). Beispiel:
+    \cjava[morekeywords={java}]{java A25_Zahlenumrechner 42:ws:|num||cmt|0x|cmt|2A|num|:ws:|num||cmt|0o|cmt|52|num|:ws:|num||cmt|0b|cmt|101010|num| }\,.
+\end{solution}
+
+\subsection{Papa-Erpel und Mama-Ente}
+
+\label{sec:duckfamily}In dieser Aufgabe soll das Verständnis für Objekt-Orientierte Programmierung vertieft werden, wobei das Konzept der Vererbung noch keine Anwendung findet.
+Es gilt eine Enten-Klasse zu Konstruieren auf derer Basis wir einen Stammbaum verwalten möchten. Eine Ente hat:
+\begin{itemize}[nolistsep]
+    \item einen Namen (\bjava{String}),
+    \item ein Alter (\bjava{int}, \bjava{byte}, \ldots) sowie
+    \item eine Mama-Ente (\bjava[morekeywords={[3]{Ente}}]{Ente}) und einen Papa-Erpel (\bjava[morekeywords={[3]{Ente}}]{Ente}).
+\end{itemize}
+
+Damit sich kein Papa-Erpel einfach so seiner Elternschaft entledigen kann, sollen alle Attribute einer Ente mit \bjava{private} deklariert werden, es gilt Methoden zu schreiben (sogenannte \emph{Getter} und \emph{Setter}) um diese Werte zu beeinflussen und abzufragen. Das Erschaffen einer Ente soll wie folgt funktionieren:
+\begin{java*}[morekeywords={[3]{Ente}}]
+Ente dieter = new Ente("Dieter", 5);
+Ente jasmin = new Ente("Jasmin", 7);
+Ente flo    = new Ente("Florian", 0, dieter, jasmin);
+\end{java*}
+Wir haben also die Ente \T{dieter} (ohne Eltern, dies wird jeweils durch \bjava{null} gekennzeichnet), die $5$ Jahre alt ist, die $7$ jährige Ente \T{jasmin} mit Namen \say{Jasmin} und die nulljährige Ente \T{flo} mit Namen \say{Florian}, deren Papa \T{dieter} und deren Mutter \T{jasmin} ist (\notetext{sämtliche implizierten Geschlechtszugehörigkeiten sind natürlich nur exemplarisch und sollen den Enten mitnichten die Möglichkeit nehmen sich anders zu identifizieren}).\par{}
+Nun gilt es entsprechende Methoden zu erstellen um mit den Enten arbeiten zu können. Es gilt:
+\begin{itemize}[nolistsep]
+    \item mittels \bjava{geburtstag()} soll das Alter einer Ente um ein Jahr erhört werden können. Schreibe auch \bjava{geburtstag(int)} mit dem eine Ente gleich mehrmals feiern darf (man also das Alter relativ um eine gewisse Anzahl an Jahren erhöht).
+    \item durch \bjava{getName()}, \bjava{getFather()} und \bjava{getMother()} sollen die jeweiligen Eigenschaften zurückgeliefert werden.
+    \item durch \bjava{changeName(String)} soll der Name einer Ente geändert werden können.
+\end{itemize}
+Final gilt es noch eine \bjava{toString()}-Methode zu schreiben, die einen \bjava{String} zurückliefert, der die Ente repräsentiert.\\
+So soll \bjava{dieter.toString()} folgendes liefern:
+{\small\begin{plainvoid}
+|plain|Ich heiße Dieter und bin 5 Jahre alt.|plain|
+\end{plainvoid}}
+für eine Ente mit Eltern wird folgendes Ergebnis gewünscht (\bjava{flo.toString()}):
+{\small\begin{plainvoid}
+|plain|Ich heiße Florian, bin 0 Jahre alt, meine Mutter heißt Jasmin und mein Vater Dieter.|plain|
+\end{plainvoid}}
+\textit{Hinweis, Java ruft zum Beispiel bei einer Ausgabe mittels \bjava{System.out.println()} automatisch die \bjava{toString()} Methode eines Objekts auf, die auch implizit gegeben ist, da aber nicht so sinnvolle Informationen liefert (einfach mal ausprobieren \Laughey). Es genügt nun also \bjava{System.out.println(flo)} zu schreiben.}
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{easy}{A26_Ente.java}. Wir sammeln zuerst alle notwendigen Attribute, die einer \solGet{keywordC}{Ente} so zu eigen sind. Für die Struktur, heißt die Klasse hier \solGet{keywordC}{A26\_Ente}:
+    {\upshape
+    \begin{java}[firstnumber=10,add to literate={A26_Ente}{{\solGet{keywordC}{A26\_Ente}}}8]
+/// Der Name der Ente
+private String name;
+/// Das Alter der Ente
+private short alter;
+/// Referenz auf eine Mama {@link A26_Ente}
+private A26_Ente mama;
+/// Referenz auf eine Papa {@link A26_Ente}
+private A26_Ente papa;
+    \end{java}
+    }
+    Die Konstruktoren \solGet{keywordC}{A26\_Ente}\bjava{(String,int)} und \solGet{keywordC}{A26\_Ente}\bjava{(String,int,}\solGet{keywordC}{A26\_Ente}\bjava{,}\solGet{keywordC}{A26\_Ente}\bjava{)} weisen diese Werte nun einfach zu. Auch die Getter und Setter sind nicht besonders interessant, weswegen es zuletzt nur noch die \bjava{toString}-Methode gibt, die wir betrachten mögen:
+    {\upshape
+    \begin{java}[firstnumber=111,add to literate={A26_Ente}{{\solGet{keywordC}{A26\_Ente}}}8]
+public String toString() {
+    if (this.mama == null || this.papa == null) {
+        return "Ich heiße " + this.name + " und bin " + this.alter + 
+               " Jahre alt.";
+    } else {
+        return "Ich heiße " + this.name + " und bin " + this.alter + 
+               " Jahre alt" + ", meine Mutter heißt " + mama.getName() + 
+               " und mein Vater " + papa.getName() + ".";
+    }
+}
+    \end{java}
+    }
+\end{solution}
+
+%
+%
+% .##.....##.####.########.########.########.##......
+% .###...###..##.....##.......##....##.......##......
+% .####.####..##.....##.......##....##.......##......
+% .##.###.##..##.....##.......##....######...##......
+% .##.....##..##.....##.......##....##.......##......
+% .##.....##..##.....##.......##....##.......##......
+% .##.....##.####....##.......##....########.########
+%
+%
+
+\section{Mittelschwere Aufgaben}
+
+\textit{Dieser Abschnitt enthält eine Ansammlung eher aufwändigerer Aufgabenstellungen. Auch hier gilt: dokumentieren ist die halbe Miete.}
+
+\subsection{Turing-Maschine}
+\label{sec:turing}
+\textit{Vorab: Eine Programmiersprache erfüllt die Eigenschaft: \say{Turing-Vollständig}, wenn sie sich von einer Turing-Maschine emulieren lässt. Java und die meisten großen Programmiersprachen sind Turing-Vollständig. Das bedeutet wir können sie auch durch eine ganz kleine einfache Maschine ausdrücken: Die von Alan Turing 1936 eingeführte \imptext{Turingmaschine}\footnote{\url{https://de.wikipedia.org/wiki/Turingmaschine}}. Wir wollen uns hier nicht ausführlich mit dieser genialen Entwicklung aufhalten. Es sei nur als Hintergrundinformation gegeben, da wir hier eine solche in Java implementieren werden. Die Turingmaschine besitzt zwar in der Theorie unbegrenzt Speicherplatz, wir werden diesen hier allerdings - aus offensichtlichen Gründen - künstlich begrenzen.}\par{}
+
+Im Folgenden besitzen wir ein Arbeitsband (\emph{working-tape}, hier durch ein Array repräsentiert) mit einer Länge von $42$ Feldern (oder jeder beliebigen anderen Anzahl, länger als $10$ sollte es aber schon sein \Tongey) auf dem sich ein Lese-/Schreib-Kopf (der sogenannte \emph{head}) bewegen kann. Dieser startet auf dem ersten Feld und kann nur nach links oder rechts bewegt werden (und zwar jeweils immer ein Feld weit), wobei wir zur
+\say{Emulation} eines unbegrenzten Speichers einfach festlegen, dass das Arbeitsband einen \say{Kreis} bildet (viel Spaß das in den Gedanken zu modellieren \Laughey), wenn wir also auf dem ersten Feld nach links gehen, landen wir auf dem letzten Feld, und anders herum, wenn wir auf dem letzten Feld nach rechts möchten, landen wir wieder auf dem ersten Feld (\textit{Hinweis: In Array-Notation entspricht das \say{erste Feld} \bjava{tape[0]} und das \say{letzte Feld} \bjava{tape[41]}}). 
+Zu Beginn sei jedes Feld des Arrays/Arbeitsbandes mit $0$ initialisiert. Es empfiehlt sich ein Array aus Zeichen (\bjava{char}) zu machen, da wir so eine für uns lesbare Ausgabe erhalten.\par{}
+Nun möchten wir das Programm auch steuern. Hierzu definieren wir uns fünf verschiedene Kontrollzeichen:
+\begin{description}[nolistsep]
+    \item[\say{\T{>}}] Dieses Zeichen bewegt den Kopf um eins nach rechts 
+    \item[\say{\T{<}}] Dieses Zeichen bewegt den Kopf (intuitiver Weise) um eins nach links
+    \item[\say{\T{+}}] Dieses Zeichen sorgt dafür, dass die Zahl/das Zeichen auf die/das der Kopf zeigt um eins ($1$) erhöht wird.
+    \item[\say{\T{-}}] Dieses Zeichen sorgt dafür, dass die Zahl/das Zeichen auf die/das der Kopf zeigt um eins ($1$) verringert wird.
+    \item[\say{\T{!}}] Mit diesem Zeichen soll der Wert auf den der Kopf aktuell zeigt, ausgegeben werden. Spätestens hier sollte die Zahl in ein Zeichen konvertiert werden.
+\end{description}
+
+\emph{Wichtiger Hinweis: Zur Vereinfachung (und damit Niemand 65-mal 'Plus' Schreiben muss um überhaupt zum $a$ zu kommen) kann man auch alle Felder schon mit 'a' initialisieren. Im Folgenden werde ich bei den  Beispielen davon ausgehen, dass dem so ist.)}\\
+
+Wir möchten nun der Methode \bjava{turing} eine Zeichenkette an diesen Zeichen übergeben, wobei uns dann die entsprechenden Ergebnisse (bei \T{!}) ausgegeben werden. Zwei Beispiele (jeweils ohne die Anführungszeichen):
+\begin{itemize}[nolistsep]
+    \item \say{\T{!+!+!}} sollte \say{abc} ausgeben.
+    \item \say{\T{-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-{}-!>!+++++++++++!!+++!}} sollte \say{Hallo} ausgeben.
+\end{itemize}
+
+\textit{Hinweis: Für einen Überblick über die Zuordnungen der ASCII-Tabelle, siehe hier: \url{https://www.torsten-horn.de/techdocs/ascii.htm}}.
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{middle}{A31_Turing.java}. Es ist nur eine einzige Methode vonnöten, da sich die Maschine - abseits des komplizitierten hineindenkens - echt einfach implementieren lässt. Die Bandlänge sei hierbei in einer Konstante vermerkt, damit wir sie im Zweifelsfall leicht modifizieren können:
+{\upshape
+\begin{java*}[morekeywords={[4]{WORKING_TAPE_SIZE}}]
+public static final int WORKING_TAPE_SIZE = 42;
+\end{java*}
+}
+     Der Hauptteil der Methode \bjava{turing(String)} ist nun ein \bjava{switch-case}, welches je nach eingelesenem Zeichen verschieden verfährt. In diesem Fall habe ich die Methode so implementiert, dass die \say{Ausgabe} als \solGet{keywordA}{String} zurückgegeben wird:
+{\upshape
+\begin{java}[firstnumber=35,morekeywords={[4]{WORKING_TAPE_SIZE}}]
+public static String turing(String befehl) {
+    //hier wird das Turingband als char-Array simuliert
+    char[] band = new char[WORKING_TAPE_SIZE];
+    //und mit dem Buchstaben 'a' ausgefüllt
+    for(int i = 0; i < band.length; i++)
+        band[i] = 'a';
+        
+    int kopf = 0; // Initilaisiere Kopf
+    String output = ""; // Speichere Ausgabe
+
+    //jetzt wird der als String übergebene Befehl ausgeführt
+    for(int i = 0; i < befehl.length(); i++){
+        switch(befehl.charAt(i)){
+            // wenn am Rand des Bandes: stetze Kopf auf das Ende
+            case '<': kopf = (kopf == 0) ? band.length-1 : kopf-1; break;
+            // wenn am Rand des Bandes: setze Kopf auf den Anfang
+            case '>': kopf = (kopf == band.length-1) ? 0 : kopf+1; break;
+            case '+': band[kopf]++; break; // Inkrement
+            case '-': band[kopf]--; break; // Dekrement
+            case '!': output += band[kopf]; break; // Ausgabe
+            // der Befehl ist fehlerhaft
+            default: 
+                System.err.format("Das Symbol '%c' (i: %d) ist ungültig.%n",
+                    befehl.charAt(i),i); 
+                return output + "[ERROR]";
+        }
+    }
+    return output;
+}
+\end{java}
+}
+\textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A31_Turing} beliebig viele Zeichenketten durch Leerfelder getrennt angereiht werden, die dann jeweils von der Turingmaschine ausgeführt werden. Die Turingmaschine wird hierbei für jede Zeichenkette \say{zurück gesetzt}/neu konstruiert. Wer als Shell \T{zsh} verwendet (oder im Allgemeinen eine Shell, die dem Ausrufezeichen eine besondere Bedeutung zukommen lässt), sollt die Zeichenkette in einfache Anführungszeichen einschließen. Hier werden diese in der Regel nicht expandiert. Beispiel: \cjava[morekeywords={java}]{java A31_Turing '!+!+!':ws:'+++!+!+!'}.
+\end{solution}
+
+
+\subsection{Turing-Reversed}
+
+Schreibe für die Turing-Maschine aus \ref{sec:turing} ein Programm, welches eine Zeichenkette einliest und in die notwendigen Turing-Befehle umwandelt (schreibe mir doch ein paar schöne Weihnachtsgrüße \Winkey).\par{}
+
+\textit{Hinweis: Da man hierfür den Kopf ja eigentlich nicht verschieben muss ist diese Aufgabe an sich recht einfach. Es lohnt sich aber zu versuchen, einen (möglichst) minimalen Turing-Code zu erzeugen \Laughey.}
+
+\begin{solution}
+    Der Code befindet sich hier: \aTask{middle}{A32_TuringReversed.java}. Hier wird der Code nun nicht besprochen, es wird nur das grundlegende Prinzip erklärt (der Code selbst sollte dann zusammen mit den Kommentaren leicht verständlich sein). Wir wählen einen greedy-Ansatz, entscheiden uns also für jedes Zeichen einzeln zu einer optimalen Teillösung, modifizieren dann das Band (wenden also die dafür notwendigen Befehle an) und berechnen dann auf dieser Basis die optimale Teillösung für das nächste Zeichen. Diese Lösung ist dann nicht optimal, wenn es an einer Stelle mehrere \say{gleich-perfekte} Möglichkeiten gibt das nächste Zeichen zu erzeugen. Der Code befasst sich nicht mit diesem Fall, es liese sich aber lösen in dem wir dann für jede Möglichkeit in einen Rekursionsfall hinabsteigen und so am Ende alle möglichen (\say{optimalen}) Fälle berechnen und hinsichtlich ihrer Länge vergleichen.\par{}
+    Nun aber zum Erhalt eines Teiloptimalen Schrittes. Wir speichern ebenfalls eine interne Repräsentation des Bandes weswegen unter Umständen die Länge des Bandes der Ziel-Turingmaschine von Relevanz ist. Nun wenden wir für jedes gewünschte Zeichen die folgenden Schritte an:
+    \begin{enumerate}
+        \item Entspricht das Zeichen dem letzten Zeichen? \(\Rightarrow\) \say{\T{!}} (ein Zeichen für die Ausgabe ist das Minimum) und zum nächsten gewünschten Zeichen voranschreiten.
+        \item Berechne \say{Distanz} des gewünschten Zeichens zum Wert auf den aktuell der Zeiger zeigt. Sei diese Distanz hier \(d\).
+        \item Berechne für alle Felder mit einem Abstand von maximal \(d\) um die aktuelle Zeigerposition, die Distanz zum gewünschten Zeichen. 
+        \item Berechne nun das Feld bei dem die Summe aus Abstand zum gewünschten Zeichen und zur aktuellen Position am geringsten ist.
+        \item Wenn nötig: Bewege Kopf auf dieses Feld (mittels \say{\T{>}} und \say{\T{<}})
+        \item Wenn nötig: Wende Inkrement (\T{\say{+}})/Dekrement (\T{\say{-}}) an
+        \item Füge das Zeichen für die Ausgabe an: \say{\T{!}}.
+    \end{enumerate}
+\end{solution}
+
+\subsection{Fibonacci}
+
+Diese Aufgabe soll die Freuden der rekursiven Programmierung näher bringen.
+
+Schreibe eine Methode getreu \bjava{long fibonacci(int N)}, welches die $N$-te Fibonacci-Zahl berechnet und zurückliefert. Versuche dies auf zwei Arten:
+\begin{itemize}[nolistsep]
+    \item Mit einer \bjava{for}-Schleife.
+    \item Mit einem rekursiven Aufruf, das bedeutet, dass sich die Funktion selbst aufruft.
+\end{itemize}
+Kannst du den Algorithmus für größere Werte optimieren indem du zum Beispiel Werte nicht mehrfach berechnest?\par{}
+\textit{Hinweis: Die Fibonacci-Funktion definiert sich mit $fib(1) = fib(2) = 1$, sowie für alle $n \geq 3$ durch $fib(n) = fib(n-1) + fib(n-2)$. Falls dies zu einfach sein sollte, oder bereits gemacht wurde, kann auch die Tetranacci-Funktion implementiert werden. Diese definiert sich durch: $tnat(0) = 0,\, tnat(1) = tnat(2) = 1,\,tnat(3) = 2$ und rekursiv für $n \geq 4$ durch $tnat(n) = tnat(n-1) + tnat(n-2) + tnat(n-3) + tnat(n-4)$. Tipp: So ist $tnat(10) = 208$.}
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{middle}{A33_Fibonacci.java}. In ihm werden drei verschiedene Varianten vorgestellt:
+    \begin{itemize}[nolistsep]
+        \item Eine iterative Implementation, die nur die beiden für den nächsten Schritt notwendigen Werte behält.
+        \item Eine rekursive Implementation, die bereits berechnete Werte in einem Array speichert und somit nicht noch einmal berechnet.
+        \item Eine (direkte) rekursive Implementation, die einfach die \(N\)-te (\tikz[baseline=0.1ex]{\duck[scale=0.15,water]}) Fibonacci-Zahl berechnet.
+    \end{itemize}
+    Wir betrachten hier die zweite Implementation. Die Erweiterung auf eine Tetranacci-Funktion solle für alle drei Implementationen leicht ersichtlich sein.\par{}
+    Wir benötigen ein Array, in dem wir die Werte zwischenspeichern können. Es sei hier durch \bjava{long[] fib_rek_save} notiert. Es ergibt sich:
+{\upshape
+\begin{java}
+public static long fibonacci_rekursiv_save(int N){
+    if(N < 0) return -1; // Fehlerfall
+    if(N == 0) return 0; // Keine Berechnung nötig 
+    if(N < 3) return 1; // Keine Berechnung nötig
+
+    fib_rek_save = new long[N+1];
+    fib_rek_save[0] = 0; 
+    fib_rek_save[1] = fib_rek_save[2] = 1; 
+    return fibonacci_rekursiv_save_helper(N);
+}
+
+private static long fibonacci_rekursiv_save_helper(int N){
+    if (N <= 0) return 0; // Ende der Rekursion
+    if (fib_rek_save[N] == 0) // Noch nicht berechnet
+        // Berechne Wert:
+        fib_rek_save[N] = fibonacci_rekursiv_save_helper(N-1) 
+                          + fibonacci_rekursiv_save_helper(N-2); 
+    return fib_rek_save[N]; // Da Fibonacci Zahlen ab N = 1 > 0
+}
+\end{java}
+}
+    Diese Variante baut offensichtlich darauf auf, dass die Fibonacci-Zahlen für \(N > 0\) nie Null (\(0\)) sind. Dies kann man selbstredend mit Objekten und \bjava{null} umgehen, es ist hier allerdings
+    nicht vonnöten.\par{}
+    \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A33_Fibonacci} beliebig viele Zahlen durch Leerfelder getrennt nachgestellt werden, wobei für jede Zahl \(N\) die \(N\)-te Fibonacci Zahl mit jeder der drei Varianten berechnet sowie die Zeit (ungefähr) gemessen wird. Wir können hier auch die Range-Funktion der Bash ausnutzen und so mit \cjava[morekeywords={java}]{java A33_Fibonacci \{25..42\}} alle Fibonacci zahlen von der \(25\)-ten an bis zur \(42\)-ten berechnen. Der Zeitunterschied zwischen den Varianten sollte spätestens für \(N=42\) mehr als deutlich werden.
+\end{solution}
+
+% TODO TODO TODO: MAKE GIT WITH ALL OF THIS INCLUDING TEX-CODE AND STUFF
+
+\subsection{Wer wird Entionär?}
+
+In dieser Aufgabe gilt es ein Programm zu schreiben, welches dem Nutzer fünf Fragen mit steigender Schwierigkeit stellt, wobei bei jeder Frage vier verschieden Antwortmöglichkeiten zur Verfügung stehen
+von denen immer genau eine richtig ist. Da wir hier nicht den Kapitalismus unterstützen möchten gilt es, die Güte der Enten zu erlangen \Tongey.\par{}
+Für die Fragen besitzt der Spieler (pro Spiel) zwei verschiedene Joker: den $50:50$-Joker, der genau zwei der drei falschen Antworten (für den Spieler erkennbar) ausschließt und den Enten-Joker. Dieser ergibt sich aus dem pro korrekter Frage um $10$ ansteigenden Güte-Score der Enten wie folgt: Mit einer Wahrscheinlichkeit von Güte\% (also in der dritten Frage zum Beispiel $30\%$) erhält der Nutzer die richtige Antwort von einer netten Ente eingequackt (der Nutzer erfährt, dass es sich um die richtige Antwort handelt). Im anderen Fall sagt die Ente, dass sie sich leider nicht sicher ist, schließt allerdings eine falsche Antwort mit Sicherheit für den Spieler aus. \par{}
+Der Nutzer kann beide Joker jeweils nur einmal pro Spiel einsetzen wobei auch beide Joker bei einer Frage
+verwendet werden können. Der Spieler scheidet aus, sobald er eine Frage nicht richtig beantwortet. Es gibt kein Zeitlimit.\par{}
+
+Das Programm soll nun für jede der insgesamt fünf Fragestufen, jeweils verschiedene Fragen zur Auswahl haben und zufällig auswählen (für dieses Beispiel reichen ja zwei pro Kategorie).\par{}
+
+\textit{Normierung der Eingaben. In jeder Frage soll der Nutzer mit den Buchstaben $A$, $B$, $C$ oder $D$ eine der vier Antwortmöglichkeiten auswählen können. Den $50:50$ Joker soll er mit $F$ (wegen fifty) und den Enten-Joker mit $E$ einsetzen können (sofern diese noch zur Verfügung stehen). Das Spiel soll jeder Zeit durch $Q$ (für Quit, oder Quack \Tongey) verlassen werden können. Bei Sieg, Ausscheiden oder einem Verlassen des Spiels soll sich das Programm mit einer entsprechenden Ausgabe beenden.}
+
+\begin{solution}
+    Die Lösung besteht aus zwei verschiedenen Dateien. Einer Hilfsklasse, die uns ein Frage-Objekt modelliert (\aTask{middle}{A34_Question.java}) sowie der Hauptklasse, die den eigentlichen Spielverlauf steuert, sowie den Pool an Fragen definiert. Namentlich: \aTask{middle}{A34_Entionaer.java}. Wir betrachten zuerst die Gestalt einer Frage, wobei es nebst Gettern und Settern nur drei wichtige Attribute gibt:
+{\upshape
+\begin{java}[firstnumber=24]
+private String questionText;
+private String[] answers;
+private int correctAnswer;
+\end{java}
+}
+    Sie definiert sich also durch den eigentlichen Fragetext (\bjava{String}), vier verschiedene Antwortmöglichkeiten (\bjava{String[]}) und eine richtige Antwort (\bjava{int}). Natürlich handelt es sich hier nur um eine einfache, geradzu naive Herangehensweise an eine Frage, sie reicht aber im Kontext der Bearbeitung dieser Aufgabe durchaus aus. Interessant ist noch die \bjava{toString()}-Methode, die die Fragen-Klasse überlädt:
+{\upshape
+\begin{java}[firstnumber=96]
+public String toString(){
+    String question = this.getQuestionText();
+    String answers[] = this.getAnswers();
+
+    String displayString = "";
+    displayString += question+"\nAntwortmöglichkeiten:\n";
+
+    for(int i = 0; i<answers.length; i++){
+        if(answers[i] != null) {
+            displayString += "  ["+(char) ('A' + i)+"] " + answers[i] + "\n";
+        }
+    }
+
+    return displayString;
+}
+\end{java}
+}
+    Wir formatieren also einfach die Frage und geben die jeweiligen Antwortmöglichkeiten aus, sofern diese nicht mit dem Wert \bjava{null} versehen sind. Letzteres tritt dann ein, wenn eine Frage durch einen Joker ausgeschlossen wird. Hierfür liefert die Klasse auch die Methode \bjava{disableAnswer(int)} die eine Antwort, die nicht die richtige ist, mit dem Wert \bjava{null}.\par{}
+    Widmen wir uns aber nun der Hauptklasse. Eine Frageobjekt definieren wir immer gleich, weswegen ich
+    hier nur eine exemplarische Frage zeige, mit der dann der Pool an Fragen (ein zweidimensionales Array, wobei die erste Dimension die Schwierigkeit und die zweite die Auswahl an Fragen angibt) gefüllt wird:
+{\upshape
+\begin{java*}[morekeywords={[4]{SUPER\_EASY,ANSWER\_A}},add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]
+question_pool[SUPER_EASY][0] = new A34_Question(
+    "Sind Enten knuffig?", 
+    new String[] {
+        "Aber natürlich",        /* Antwort A */
+        "Niemals",               /* Antwort B */
+        "Nur Freitag",           /* Antwort C */
+        "Hat wer Timo gesehen?", /* Antwort D */
+    }, A34_Question.ANSWER_A // <- die richige
+);
+\end{java*}
+}
+    Wir iterieren nun also über die fünf Schwierigkeitsstufen des Pools und wählen jeweils eine
+    zufällige Frage aus dem Pool. Für diese Frage wird dann \bjava[add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]{askQuestion(A34_Question,int)} aufgerufen. Hier wird die Frage zum einen Ausgegeben und zum anderen die Eingabe des Nutzers verarbeitet. Die Hauptsächliche Fallunterscheidung auf Basis der Nutzereingabe erfolgt also über ein großes \bjava{switch-case}, das wie folgt aufgebaut ist:
+{\upshape
+\begin{java}[firstnumber=106,add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]]
+public static boolean handleInput(char input, int level, 
+                                  A34_Question question) {
+    switch (input) {
+        // Antwort
+        case 'A': case 'B':
+        case 'C': case 'D':
+            int guess = input - 'A'; // Erhalte index der Eingabe
+            if (question.isCorrect(guess)) {
+                correctAnswer(level);
+            } else {
+                lostGame();
+            }
+            break;
+        case 'E': // Enten Joker
+            return duckJoker(level,question);
+        case 'F': // 50:50 joker
+            return fiftyfiftyJoker(question);
+        case 'Q':
+            System.out.println("Beende Spiel. Quack.");
+            System.exit(0);
+        default:
+            System.out.println("Die Eingabe '" + input + 
+                               "' ist mir leider unbekannt.");
+            return false;
+    }
+    return true;
+}
+\end{java}
+}
+    Die Methode gibt hierbei zurück, ob der Nutzer ein Level weiter kann (\bjava{true}) oder die Eingabe wiederholen muss (\bjava{false}). Die jeweils hier weiter aufgeführten Methoden führen eigentlich nur die jeweiligen Joker aus. Wer möchte, kann das Spiel komplizierter Gestalten, in dem die Antwortmöglichkeiten immer zufällig ausgegeben werden, es mehr Joker gibt. der aktuelle Geldbetrag angezeigt wird, man Highscores setzen kann, die Fragen aus einer Datei gelesen werden und natürlich noch vieles mehr \Laughey.
+\end{solution}
+
+
+\subsection{ASCII-Text}
+
+In dieser Aufgabe gilt es ein Programm zu schreiben was Text in sogenannten $DDD$ (3D) ASCII-Text konvertiert. Damit man sich
+eine Vorstellung machen kann hier ein beispielhafter Ablauf mit einer sehr einfachen Schriftart:
+\begin{plainjava}
+|plain|Gebe die gewünschte Schriftart ein>|plain| |ihl|Simple-Banner|ihl|
+|plain|Gebe den Text ein>|plain| |ihl|schwer|ihl|
+
+..######...######..##.....##.##......##.########.########.
+.##....##.##....##.##.....##.##..##..##.##.......##.....##
+.##.......##.......##.....##.##..##..##.##.......##.....##
+..######..##.......#########.##..##..##.######...########.
+.......##.##.......##.....##.##..##..##.##.......##...##..
+.##....##.##....##.##.....##.##..##..##.##.......##....##.
+..######...######..##.....##..###..###..########.##.....##
+\end{plainjava}
+
+Die Namen für die Schriftart und die Schriftart selbst kann man sich eigentlich selbst aussuchen (sie sollten nur irgendwie eindeutig
+angegeben werden). Allerdings sollten mindestens Schriftarten mit den folgenden Eigenschaften umgesetzt werden:
+\begin{itemize}[nolistsep]
+    \item Alle Zeichen besitzen die gleichen Dimension (also Höhe und Breite)
+    \item Die Zeichen besitzen einen 3D-Effekt
+    \item Die Zeichen besitzen eine unterschiedliche Höhe
+    \item Die Zeichen die die Schriftart ausmachen sollen zufällig generiert werden. Ein Beispiel mit $a$:
+\begin{plainjava}
+ .oxlQH   
+/   ÜRMb  
+|plain| dl0F"LI  |plain|
+tPg  YCM  
+ <!y8bmIs 
+\end{plainjava}
+\end{itemize} 
+\textit{Hinweis: Solche Generatoren existieren bereits im Internet, wer also besonders Tippfaul ist, kann sich einfach die Zeichen von ihnen nehmen und verwenden. Wer eine kleine Herausforderung möchte, kann die Schriften in Dateien mit Namen \say{\bvoid{:lan:Schriftart:ran:.font}} ablegen und dann vom Programm dynamisch laden lassen \Winkey. Folgendes Beispiel zeigt exemplarisch, wie man eine Datei in Java auslesen kann:}
+\begin{java}
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
+public class ExampleFileReader {
+    public static void main(String[] args) {
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader("<DateiPfad>"));
+            String line = reader.readLine();
+            while (line != null) {
+                // Hier kann etwas mit 'line' gemacht werden.
+                line = reader.readLine();
+            }
+            reader.close(); // Analog zum Scanner
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+\end{java}
+Das ominöse \bjava{try-catch}-Konstrukt wird später in der Vorlesung noch aufgegriffen werden.
+
+\begin{solution}
+    Die Lösung gliedert sich in drei Dateien auf: \aTask{middle}{A35_Character.java} für die Definition eines einzelnen Zeichens, \aTask{middle}{A35_Font.java} für die Definition der Schriftart und \aTask{middle}{A35_ASCII.java} für das eigentliche Programm. Weiter ist hier (\aTask{middle/Data}{test.font}) noch eine beispielhafte Schriftart zum Verwenden.
+    \paragraph{Die Dateispezifikation:}
+    Wir basteln uns hier ein (ganz simples, menschenlesbares) \say{Dateiformat} um die Schriftarten zu definieren und so das gleiche Programm für beliebig viele Schriftarten zu verwenden. Die ersten drei Zeilen haben hierbei eine besondere Bedeutung. \begin{itemize}[nolistsep]
+        \item Die erste Zeile gibt an, wie viele Zeichen die Datei definiert,
+        \item die zweite gibt an wie hoch die einzelne Zeichen sind und
+        \item die dritte definiert die Reihenfolge, in der die Zeichen im Folgenden definiert werden.
+    \end{itemize}
+    Ein Beispiel für eine solche \say{Kopfdefinition} der Datei ist folgendes:
+{\upshape
+    \begin{void}
+27
+11
+ ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    \end{void}
+}
+    Wir werden uns nun mit dem Erstellen einer Schriftart beschäftigen.
+    \paragraph{Das Laden einer Schriftart:}
+    \bgroup
+    \lstset{add to literate={A35_Character}{{\solGet{keywordC}{A35\_Character}}}{12} {A35_Font}{{\solGet{keywordC}{A35\_Font}}}{9}}
+        Die Klasse \bjava{A35_Character} definert ein Zeichen, welches sich durch zwei
+        Attribute auszeichnet:
+        \begin{itemize}[nolistsep]
+            \item \bjava{char character}: definiert das Zeichen welches vom zugehörigen Schriftzeichen repräsentiert wird.
+            \item \bjava{String[] lines}: repräsentiert das Schriftzeichen zeilenweise.
+        \end{itemize}
+        Die Schriftart in der Klasse \bjava{A35_Font} verwaltet nun ein Array an \bjava{A35_Character}, die wir aus der Datei laden. Das Laden läuft nun wie folgt ab:
+{\upshape
+\begin{java}[firstnumber=66]
+String line = reader.readLine();
+int count = Integer.parseInt(line);
+line = reader.readLine();
+this.char_height = Integer.parseInt(line);
+// Nun lesen wir in der nächsten Zeile ein, welche Zeichen kommen
+char[] chars = new char[count];
+line = reader.readLine();
+for (int i = 0; i < chars.length; i++)
+    chars[i] = line.charAt(i);
+\end{java}
+}
+Wir haben nun also alle erwartenden Zeichen in \bjava{chars}. \notetext{Warum muss dann die Anzahl der Zeichen extra angegeben werden? Nun, dies macht uns die Definition etwas einfacher. Durchaus bietet diese Art der Dateiverarbeitung noch einige Möglichkeiten optimiert zu werden. Hier soll nur das Vorgehen erläutert werden.}\par{}
+Nun lesen wir also die Daten für die Schriftzeichen ein:
+{\upshape
+\begin{java}[firstnumber=75]
+A35_Character[] font = new A35_Character[count];
+for(int i = 0; i < count ; i++){// Die Zeichen
+    // Die erste Zeile gibt an welches Zeichen es ist: 
+    char font_char = chars[i];
+    String[] font_data = new String[this.char_height];
+    for(int j = 0; j < this.char_height; j++){// Die Zeilen eines Zeichens
+        line = reader.readLine();
+        font_data[j] = line;
+    }
+    font[i] = new A35_Character(font_char, font_data);
+}
+\end{java}
+}
+    Wenn das Laden der Schriftart scheitert (weil sie zum Beispiel nicht existiert) laden wir eine Standardschriftart ohne besondere Features:
+{\upshape
+\begin{java}[firstnumber=102]
+public static A35_Font getDefaultFont(){
+    // Wir konstruieren die Zeichen
+    A35_Character[] font = new A35_Character[26];
+    for (int i = 0; i < font.length; i++) {
+        font[i] = new A35_Character((char)('A' + i),
+                        new String[] {"" + (char)('A' + i)}
+                  );
+    }
+    return new A35_Font(font);
+}
+\end{java}
+}
+\paragraph{Die Hauptroutine:}
+Der Hauptteil des Programms ist nun denkbar einfach. Nachdem die Schriftart in \bjava{A35_Font font} geladen und der Text in \bjava{text} gesetzt ist, läuft die Zeichenroutine wie folgt ab:
+{\upshape
+\begin{java}[firstnumber=32]
+char[] input_chars = text.toCharArray();
+for (int line = 0; line < font.getCharHeight(); line++) {
+    // Iteriere für jede Zeile über alle Zeichen:
+    for (int i = 0; i < input_chars.length; i++) {
+        A35_Character the_char = font.getChar(input_chars[i]);
+        if(the_char == null) { // gibbet nicht
+            System.err.format("Das Zeichen '%c' wird von der Schriftart '%s' nicht geliefert!%n", input_chars[i], fontName);
+            System.exit(1);
+        } 
+        System.out.print(the_char.getLine(line));
+    }
+    System.out.println(); // new line
+}
+\end{java}
+}
+    Wir iterieren also einfach über die Höhe der Schriftart und dann über jede Zeile der Zeichen die eingegeben wurden. Als weitere Aufgabe kann man versucehn mehrzeilige Ausgaben zu unterstützten.\par{}
+    \textit{Hinweis zur Lösung:} Die Lösung erlaubt es direkt über die Kommandozeile den Text zu formatieren. So genügt (wenn die Schriftart \T{test.font} im selben Verzeichnis vorliegt): \cjava[morekeywords={java}]{java A35_ASCII test "HALLO WELT"}\,. Zuerst schreiben wir also dne Namen der Schriftart und dann den Text, den wir angezeigt bekommen möchten.
+    \egroup
+\end{solution}
+
+\subsection{TicTacToe-KI}
+
+Diese Aufgabe gliedert sich in zwei Schritte: \begin{enumerate}[nolistsep]
+    \item Programmiere ein spielbares TicTacToe für die Konsole
+    \item Schreibe einen Computergegner der die Partie gegen dich spielt.
+\end{enumerate}
+Der Computergegner muss nicht gewinnen, aber darf nicht verlieren!\smallskip\\
+\begin{minipage}{0.8\linewidth}
+    \textit{Formales: Die Eingabe für den Spieler soll durch die Zahlen $1$ bis $9$ erfolgen, die jeweils auf das zu setzende Feld (siehe rechte Grafik) verweisen. Die Spieler/Computer setzen abwechselnd ein ihnen eigenes Symbol in eines der noch freien Felder. Ziel ist es drei der eigenen Symbole in einer horizontalen, vertikalen oder diagonalen Linie anzureihen.}
+\end{minipage}\begin{minipage}{0.2\linewidth}
+    \centering\begin{tabular}{c|c|c}
+        1 & 2 & 3 \\\hline
+        4 & 5 & 6 \\\hline
+        7 & 8 & 9
+    \end{tabular}
+\end{minipage}\bigskip\\
+\textit{Tritt dies auf endet das Spiel und der Spieler/Computer der dies geschafft hat gewinnt das Spiel. Sonst endet die Partie mit einem Unentschieden. Auf ein Feld auf dem sich bereits ein Symbol befindet, darf kein weiteres gesetzt werden.}
+
+\begin{solution}
+    Die Lösung für diese Aufgabe gliedert sich in eine ganze Menge Klassen. Dies wäre natürlich nicht möglich gewesen - so lässt sich die Aufgabe mit nur zwei Klassen ebenfalls gut lösen. Um die Konzepte aber schön getrennt vermitteln zu können gesellen sich die Folgenden Klassen zur Problemlösung:
+    \begin{itemize}[nolistsep]
+        \item \aTask{middle}{A36_Ai.java} verwaltet den Computer. Da wir ihn hier auf dem Spielbaum aufbauen findet sich die Logik allerdings im Konten selbst:
+        \item \aTask{middle}{A36_Node.java} verwaltet den Spielbaum. Was das ist werden wir uns später noch einmal ansehen. Ein Knoten hält jeweils eine Instanz des Spielfeldes:
+        \item \aTask{middle}{A36_Board.java} verwaltet den Zustand eines Spielfeldes. Bietet weiter eine Möglichkeit eine Kopie des Spielfeldes anzufertigen.
+        \item \aTask{middle}{A36_NodeList.java} verwaltet die \solGet{keywordC}{A36\_Node}-Objekte in einer Liste und erlaubt es einem Knoten im Spielbaum, über beliebig viele Kinder zu Verfügen. Da die Implementation analog ist zur \solGet{keywordC}{A38\_EntenListe} (aus: \ref{sec:duckhistory})
+        \item \aTask{middle}{A36_State.java} verwaltet den Zustand eines Feldes in einem \solGet{keywordC}{A36\_Board}-Spielfeld.
+        \item \aTask{middle}{A36_TicTacToe.java} beinhaltet den Spielablauf. Erlaubt es also dem Nutzer die Eingaben zu verarbeiten.
+    \end{itemize}
+    \paragraph{Das Spielfeld:}
+    Beginnen wir mit der einfachen Implementation. An sich ist das Spielfeld ein eindimensionales, neun-elementiges Array aus Zuständen (\,\solGet{keywordC}{A36\_State}), wobei Zustände nichts anderes sind als Elemente eines Enums die angeben ob das Feld gerade leer (\bjava{EMPTY}) von einem Kreuz (\bjava{CROSS}) oder einem Kreis (\bjava{CIRCLE}) belegt ist. Die Ausgabe ist nun einfach eine iteration über diese Elemente mit grafischer Aufbereitung, wir werden uns im Folgenden nicht weiter mit ihr beschäftigen. Wir wollen uns viel eher ansehen, wie überprüft wird ob es einen Sieger gibt. Hierzu machen wir nämlich keine aufwändige Routine sondern speichern einfach alle Möglichkeiten/Kombinationen in denen eine Siegbedingung vorligen kann (es empfiehlt sich natürlich sich über andere Vorgehensweisen zumindest Gedanken zu machen - es gibt viele mal mehr und mal weniger schöne Vorgehensweisen):
+{\upshape\begin{java*}
+int[][] winStates = {{0,1,2},{3,4,5},{6,7,8}, // Waagerecht
+                     {0,3,6},{1,4,7},{2,5,8}, // Senkrecht
+                     {0,4,8},{2,4,6} // Diagonal
+                    };
+    \end{java*}
+}
+    Nun reicht es über diese Arrays zu iterieren und zu prüfen, ob die angegebenen Felder den gleichen Zustand besitzen:
+\bgroup
+\lstset{add to literate={A36_State}{{\solGet{keywordC}{A36\_State}}}{9}}
+{\upshape
+\begin{java}[firstnumber=68]
+public A36_State getWinner(){
+    for(int[] a : winStates)
+        if(board[a[0]] == board[a[1]] && board[a[1]] == board[a[2]])
+            return board[a[0]]; // Wir haben einen Gewinner
+
+    return A36_State.EMPTY;
+}
+\end{java}
+}
+\paragraph{Spielbäume:}
+Bevor wir uns damit beschäftigen möchten, wie die KI selbst funktioniert, wollen wir uns mit Spielbäumen befassen. An sich ist ein Spielbaum ein (überraschung) Baum, der verschiedene Situationen des Spiels darstellt. Im Kontext unseres Tic-Tac-Toe-Spiels präsentiert jeder Knoten einen Zustand des Spielfelds und eine Kante den Zug den wir durchführen. Nehmen wir einmal den Spielbaum für das Ausgangsfeld, bei dem nun der Nutzer den ersten Zug machen darf, es ist in 
+\begin{figure}[tbhp]
+    \centering\begin{tikzpicture}[scale=0.75, every node/.style={transform shape}]
+        \node (0) at(2.5*5,0.75) {
+            \begin{tabular}{c|c|c}
+                1 & 2 & 3 \\\hline
+                4 & 5 & 6 \\\hline
+                7 & 8 & 9
+            \end{tabular}
+        };
+        \foreach \i in {1,...,9}{
+            \def\sX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@cs!15!white}{X}\else##1\fi}
+            \node (\i) at(2.5*\i,-4) {
+                \begin{tabular}{c|c|c}
+                    \sX{1} & \sX{2} & \sX{3} \\\hline
+                    \sX{4} & \sX{5} & \sX{6} \\\hline
+                    \sX{7} & \sX{8} & \sX{9}
+                \end{tabular}
+            };
+            \ifnum\i=5 
+                \draw[rounded corners] (0.south) -- (\i.north) node[above right,font=\footnotesize] {\i};
+            \else %
+                \pgfmathsetmacro\xoffset{abs(\i-5)/2.25}
+                \draw[rounded corners] (0.south) -- ++(0,-2.5+\xoffset) -- node[midway, above,font=\footnotesize] {\i} ++ (2.5*\i-5*2.5,0) -- (\i.north);
+            \fi
+        }
+    \end{tikzpicture}
+    \caption{Das erste Level des Spielbaums für TicTacToe.}
+\end{figure}
+Simpel gesagt schlüsselt der Spielbaum also einfach nur alle Möglichkeiten auf die es für den nächsten Spielzug gibt. Betrachten wir doch noch einmal einen Ausschnitt tiefer im Spielbaum (wir können natürlich von jedem Element rekursiv weiter verschachteln):\smallskip\\
+\lstset{add to literate={A36_Node}{{\solGet{keywordC}{A36\_Node}}}{8} {A36_Board}{{\solGet{keywordC}{A36\_Board}}}{8}}
+\begin{minipage}{0.45\linewidth}
+    \centering\begin{tikzpicture}[scale=0.75, every node/.style={transform shape}]
+        \node (0) at(2.5*2.5,0) {
+            \begin{tabular}{c|c|c}
+                X & 2 & X \\\hline
+                X & O & 6 \\\hline
+                O & 8 & 9
+            \end{tabular}
+        };
+        \foreach \i/\xi in {2/1,6/2,8/3,9/4}{
+            \def\sX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@cs!15!white}{O}\else##1\fi}
+            \node (\i) at(2.5*\xi,-3.5) {
+                \begin{tabular}{c|c|c}
+                    X & \sX{2} & X \\\hline
+                    X & O & \sX{6} \\\hline
+                    O & \sX{8} & \sX{9}
+                \end{tabular}
+            };
+            \ifnum\i=5 
+                \draw[rounded corners] (0.south) -- (\i.north) node[above right,font=\footnotesize] {\i};
+            \else %
+                \pgfmathsetmacro\xoffset{abs(\xi-2.5)/2.25}
+                \draw[rounded corners] (0.south) -- ++(0,-1.25+\xoffset) -- node[midway, above,font=\footnotesize] {\i} ++ (2.5*\xi-2.5*2.5,0) -- (\i.north);
+            \fi
+        }
+        \foreach \i/\xi in {2/2,6/3,8/4}{
+            \def\sX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@cs!15!white}{O}\else##1\fi}
+            \def\dX##1{\ifnum\i=##1 \bfseries O\else O\fi}
+            \def\dsX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@akzent!25!white}{\bfseries O}\else##1\fi}
+
+            \node (l\i) at(2.5*\xi,-7) {
+                \begin{tabular}{c|c|c}
+                    X & \sX{2} & X \\\hline
+                    X & O & \sX{6} \\\hline
+                    \dX{8} &\dsX{8} & \dX{8}
+                \end{tabular}
+            };
+        }
+        \draw[rounded corners] (9.south) -- (l8.north) node[above right,font=\footnotesize] {8};
+
+        \draw[rounded corners] (9.south) -- ++(0,-0.5) -- node[midway, above,font=\footnotesize] {2}  ++ (-5,0) -- (l2.north);
+        \draw[rounded corners] (9.south) -- ++(0,-0.95) -- node[midway, above,font=\footnotesize] {6}  ++ (-2.5,0) -- (l6.north);
+
+    \end{tikzpicture}
+\end{minipage}\hfill\begin{minipage}{0.525\linewidth}
+    Die Anzahl der Kinder nimmt also mit jedem Zug um eins ab, da dieses Feld nicht mehr in Frage kommt. Doch in wie weit ist das jetzt eigentlich hilfreich? Nun, Spielbäume helfen uns, den gesamten Spielverlauf nachzuvollziehen und zu berechnen. Wir werden so also einmal das gesamte Spiel berechnen (mit effizienteren Methoden befassen wir uns hier einmal nicht \Laughey) und dann berechnen wie \say{gut} die Entscheidung \(7\) im ersten Zug für uns ist. Bevor wir weiter auf die Bewertung und den zugrundeliegenden minmax-Algorithmus eingehen: Wie stellen wir eine solche Struktur in Java nach?\par{}
+    Dies erledigt für uns die Klasse \bjava{A36_Node}. Ein Knoten hält jeweils ein eigenes \bjava{A36_Board}, das den Spielzustand repräsentiert. Weiter muss sie noch einen \bjava{A36_State} halten, damit klar ist, wer nun am Zug ist. Hinzu kommt eine Liste and Kindknoten, repräsentiert durch \bjava{A36_NodeList} die die weiteren Spielzüge bezeichnen.
+\end{minipage}\medskip\newline
+Das Füllen eines solchen Baumes ist ebenfalls leicht. So gehen wir bei der Konstruktion einer neuen \bjava{A36_Node} einfach hin und prüfen ob das übergebene Feld noch weitere Spielzüge zulässt. Wenn ja, rufen wir einfach (und haben damit eine versteckte Rekursion) eine Methode auf, die für jedes noch freie Feld einen neuen Knoten hinzufügt:
+{\upshape
+\begin{java}[firstnumber=50]
+private void generateChildA36!**!_Nodes() {
+    for(int i = 0; i < board.board.length; i++)
+        if(board.board[i] == A36_State.EMPTY) // Feld möglich
+            childA36!**!_Nodes.append(new A36_Node(board.clone().set(i, turn),
+                                    turn.toggle()));
+}
+\end{java}
+}
+Hierbei bezeichnet \bjava{turn}, wer aktuell am Zug ist und \bjava{toggle()} haben wir so geschrieben, dass es den jeweils anderen Spieler zurückgibt. Die \bjava{clone()}-Methode haben wir wider besseren Wissens auch selbst geschrieben um eine Kopie des Spielfeldes zu erhalten und nicht nur die Referenz zu übergeben (wäre ja auch doof, wenn
+alle Möglichkeiten auf das selbe Feld angewendet werden)!
+\paragraph{Den Spielbaum auswerten:}
+Doch wie bewerten wir den Baum den wir da so toll aufgebaut haben jetzt? Wir schreiben uns hierfür eine Methode \bjava{evaluate()} die von einem bestimmten Knoten an versucht die Bewertung auszurechnen. Sie gestaltet sich wie folgt:
+{\upshape
+\begin{java}
+private int evaluate(){
+    switch (board.getWinner()){
+        case CROSS: return -1;
+        case CIRCLE: return 1;
+        default:
+            if(board.isNotFull()) // Können noch ziehen
+                return (turn==A36_State.CIRCLE) ? 
+                            searchGreatestChilds() : 
+                            searchSmallestChilds();
+            else // Unentschieden.
+                return 0;
+    }
+}
+\end{java}
+}
+Aber moooment, hier passiert nun wieder eine ganze Menge! Wir prüfen im Startknoten also folgendes: \say{Gibt es einen Sieger?} Wenn ja ist ja nicht nur das Propagieren nicht nötig, sondern wir können auch gleich abschließen, da ja ohnehin nicht weitergespielt wird. Wir weißen dem Knoten nun also einen festen Wert zu, je nachdem wer gewinnt. Ob das nun \(-42\) und \(42\) ist oder eben wie hier \(-1\) und \(1\) spielt keine Rolle. Es empfiehlt sich lediglich zwei verschiedene Werte zu nehmen (sonst suchen wir ja einfach nur den Knoten wo jemand gewinnt).\par{}
+So weit so gut, aber das Spannende geschieht nun, wenn weder Kreuz noch Kreis gewonnen hat. In diesem Fall müssen 
+wir natürlich noch überprüfen ob ein Unentschieden vorliegt. Ist dies der Fall so entscheiden wir uns für ein \say{neutrales} Element und liefern hier die \(0\) zurück; wenn aber kein Unentschieden vorliegt müssen wir uns die Kindknoten betrachten und hier tritt dann die Mechanik auf, die dem minmax-Algorithmus, den wir hier brav anwenden werden, ihren Namen gibt.\par{}
+Denn was ganz Klar ist: wenn wir Kreis sind und Kreis bei einem Sieg mit dem Wert \(1\) versehen wird, so versuchen wir unsere Gewinnwahrscheinlichkeit zu maximieren, wählen also den Kindknoten mit dem höchsten Wert. Für den Gegner wissen wir aber nicht was er wählen wird, vermutlich ist es allerdings sein Ziel ebenfalls zu Gewinnen (und sonst wäre das ja noch besser für uns \Laughey) wir müssen also in den Knoten wo er am Zug ist, das Kind mit der niedrigsten Bewertung auswählen, da dieses natürlich vom Gegenspieler favorisiert wird. Und so ergibt sich auch die letzte Unterscheidung: Sind wir am Zug (also im Kontext des Spielbaums), so wählen wir den für uns besten (max) Zug, der Knoten erhält also das Gewicht des für uns besten Kindzweiges, analog anders herum: Ist der Gegner am Zug so wählen wir den Kindknoten mit der niedrigsten Bewertung (min): Tadaa! MinMax, oder in der Reihenfolge hier: MaxMin hihi\Laughey!\par{}
+Die Suchmethode könnten wir übrigens wie folgt veranschaulichen:
+{\upshape
+\begin{java}[firstnumber=104]
+private int searchSmallestChilds(){
+    A36_Node current = childA36!**!_Nodes.get(0);
+    for (int i = 1; i < childA36!**!_Nodes.size(); i++) {
+        if(current.evaluation > childA36!**!_Nodes.get(i).evaluation)
+            current = childA36!**!_Nodes.get(i);
+    }
+    bestMove = current.board.lastPositionChange;
+    return current.evaluation;
+}
+\end{java}
+}
+Wie sich hierran auch erkennen lässt: die Bewertung eines Knotens speichern wir im Feld \bjava{evaluation}. Die KI muss nun also nur noch für den aktuellen Knoten im Spielbaum das Kind mit der höchsten Bewertung auswählen und ihr Symbol dort platzieren.
+
+\paragraph{Optimierungen:}
+
+Für Spiele wie Schach, Mühle oder eben TicTacToe ist es ein leichtes gigantische Teile des Spielbaums auszuschließen. Hierzu zählt nicht nur, identische Zweige bereits abzuschneiden (oder zu referenzieren), also wenn wir zwei mal ein und die selbe Feldposition erreichen die Kinder nur einmal zu berechnen, da sie ja identische sein werden, sondern auch weitaus mehr:
+\begin{itemize}[nolistsep]
+    \item Spielfelder die durch Drehung oder Spiegelungen in die gleiche Form umgewandelt werden können lassen sich ebenfalls vereinfachen. So lässt sich die Anzahl der gültigen Endstellungen ebenfalls massiv reduzieren.
+    \item Berechnet man die Bewertungen direkt beim Aufbau des Baumes, so kann man unter Umständen hier schon Zweige abschneiden. Hat man zum Beispiel schon einen Kindknoten mit maximal möglicher Bewertung berechnet (hier also zum Beispiel \(1\)) und wir befinden uns in einem \emph{max}-Schritt, so braucht man keinen der anderen Zweige berechnen da sie ja nicht besser sein können.
+    \item Unter Berücksichtigung der Tiefe kann man mit weiteren Spielbezogenen Maßzahlen (zum Beispiel Spiel so schnell wie möglich beenden) die Anzahl der Zweige verringern. 
+    \item Beginnt zum Beispiel die KI, oder ist die Anzahl der Optionen überschaubar, so kann der Spielbaum auch erst ab dem dritten Zug für die aktuelle Feldkonstellation berechnet werden, da zuvor noch simple Regeln oder Schemata ausreichen.
+\end{itemize}
+Es lohnt sich, das mal zu probieren, zum Beispiel für das Spiel Vier-Gewinnt \Smiley.
+\egroup
+\end{solution}
+
+\subsection{Und bis wann kommt der Weihnachtsmann?}
+
+In dieser Aufgabe ist es das Ziel ein Programm zu schreiben, welches einfach nur ausgibt in wie vielen Tagen Weihnachten ist. Hierbei kann der Schaltjahrprüfer aus \ref{sec:leapyear} hilfreich sein. Die Ausgabe soll erst einmal wie folgt aussehen:
+\begin{plainvoid}
+|plain|In 42 Tagen ist Weihnachten!|plain|
+\end{plainvoid}
+\textit{Hinweis: das aktuelle Datum in Java lässt sich zum Beispiel durch \bjava{java.time.LocalDate.now()} erfragen. Importiert man zu Beginn \bjava{java.time.LocalDate}, so genügt: \bjava{LocalDate.now()}. Es gibt aber natürlich viele andere/alternative Möglichkeiten. Wer mag, kann auch ab \emph{the Epoch} (also in Unixzeit) rechnen\ldots}
+Wir wollen das Programm nun in sofern erweitern, dass es auch ausgibt, wie viele Tage das letzte Weihnachten her ist (es gilt wieder: auf Schaltjahre achten!).
+Zuletzt möchten wir uns nun aber noch eine Fortschrittsanzeige ausgeben lassen. Diese soll in 24 Schritten angeben, wie nah wir schon am nächsten Weihnachten dran sind. Hierbei sollen
+zwölf Segmente verwendet werden, wobei diese auch 'halb' gefüllt sein können. Beispiel:
+\begin{plainvoid}
+|plain|[=======\    ]|plain|
+\end{plainvoid}
+\textit{Hinweis: Es können auch die Unicode-Symbole \T{U+2588} und \T{U+258C} verwendet werden.}
+
+\begin{solution}
+    Der Code für die Lösung befindet sich hier: \aTask{middle}{A37_Weihnachtsmann.java}, wobei alles relevante in der \bjava{main}-Methode abläuft. Der Ablauf lässt sich leicht schrittweise darstellen:
+    \begin{enumerate}
+        \item Erhalte das heutige Datum mittels \bjava{LocalDate.now()}.
+        \item Teste mittels \bjava{istSchaltjahr(int)} aus der Aufgabe \ref{sec:leapyear}, ob es sich um ein Schaltjahr handelt. Wenn Ja, ist Weihnachten am \(359\)-ten Tag des Jahres, wenn nein am \(358\)-ten.
+        \item Nun berechnen wir den aktuellen Tag im Jahr (dies kann leicht manuell Erfolgen, allerdings liefert uns die Abfrage über \bjava{LocalDate} direkt die Möglichkeit diese Zahl mittels \bjava{getDayOfYear} in Erfahrung zu bringen).
+        \item Ist der aktuelle Tag vor Weihnachten (also die erhaltenen Zahl \(> 359\) beziehungsweise \(> 358\)) so berechnen wir einfach die Differenz der Tage, also \(359 - \mathrm{TageHeute}\) (beziehungsweise \(358 - \mathrm{TageHeute}\)), andernfalls müssen wir die Resttage im Jahr noch addieren und für das nächste Jahr nochmal eine Prüfung auf ein Schaltjahr durchführen.
+        \item Nun können wir die Anzahl anzuzeigender halber Kacheln einfach durch das Verhältnis der Tage berechnen und anschließend bei der Ausgabe der Kacheln noch schauen, ob die Anzahl an Kacheln ungerade ist.
+    \end{enumerate}
+    Mehr war nicht erforderlich!
+    \textit{Hinweis zur Lösung:} Die beigelegte Lösung erlaubt es auch ein anderes Datum als das Heutige zu verwenden. Hierzu einfach nachstellend das Datum im folgenden Format angeben: \bvoid{:lan:Jahr:ran::ws::lan:Monat:ran::ws::lan:Tag:ran:}. Also zum Beispiel: \cjava[morekeywords={java}]{java A37_Weihnachtsmann 2020:ws:12:ws:5} für den \(5.\) Dezember \(2020\).
+\end{solution}
+
+\subsection{Ein Stammbaum für Enten}
+
+\label{sec:duckhistory}\textit{Hinweis: Diese Aufgabe basiert auf \say{Papa-Erpel und Mama-Ente} (\ref{sec:duckfamily}).}\par{}
+Im Folgenden gilt es eine Funktion in \bjava{Ente} zu schreiben, die den gesamten (gespeicherten) Stammbaum für ein Kind ausgibt. Die Eltern-Beziehungen sollen hierbei so lange traversiert werden, bis wir zu Enten gelangen, die keine Eltern mehr (eingespeichert) haben. Die grafische Aufarbeitung kann frei gewählt werden:\smallskip\\
+\begin{minipage}{0.45\linewidth}
+\begin{plainvoid}
+Peter Erika   Wolfgang Rosalinde
+   Dieter           Jasmin
+           Florian
+\end{plainvoid}
+\end{minipage}\hfill\begin{minipage}{0.5\linewidth}
+\centering\begin{tikzpicture}
+    \node[align=center,scale=0.5] (peter) at(-3,0) {\tikz{\duck[body=yellow!50!red!20!white,recedinghair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=red!50!black,glasses=brown!70!lightgray,scale=0.75];}\\Peter};
+    \node[align=center,scale=0.5] (erika) at(-1,0) {\tikz{\duck[body=yellow!50!red!20!white,longhair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=blue!50!black,squareglasses=brown!70!lightgray,scale=0.75];}\\Erika};
+    \node[align=center,scale=0.5] (wolfgang) at(1,0) {\tikz{\duck[body=yellow!50!red!20!white,recedinghair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=yellow!70!black,glasses=brown!70!lightgray,scale=0.75];}\\Wolfgang};
+    \node[align=center,scale=0.5] (rosalinde) at(3,0) {\tikz{\duck[body=yellow!50!red!20!white,longhair=gray!50!white,eyebrow,tshirt=white!93!black,jacket=lime!50!black,squareglasses=brown!70!lightgray,scale=0.75];}\\Rosalinde};
+
+    \node[align=center,scale=0.5] (dieter) at(-2,-1.75) {\tikz{\duck[body=yellow!50!red!20!white,parting=gray!80!brown,eyebrow,jacket=gray,lapel=black,buttons,scale=0.75];}\\Dieter};
+    \node[align=center,scale=0.5] (jasmin) at(2,-1.75) {\tikz{\duck[body=yellow!50!red!20!white,shorthair=brown!50!black,eyebrow,tshirt=white!93!black,jacket=purple!90!black,squareglasses=brown!70!lightgray,scale=0.75];}\\Jasmin};
+
+    \node[align=center,scale=0.5] (flo) at(0,-3.5) {\tikz{\duck[body=yellow!50!red!20!white,crazyhair=brown!90!black,eyebrow,jacket=sob@col@uulm@cs,lapel=sob@col@uulm@cs!50!black,buttons,scale=0.75,tie=sob@col@uulm@cs!50!black,tshirt=white,glasses,laughing];}\\Florian};
+
+
+    \begin{scope}[every path/.style=rounded corners]
+        \draw(peter.south) -- ++(0,-0.25) -| (dieter);
+        \draw(erika.south) -- ++(0,-0.25) -| (dieter);
+
+        \draw(wolfgang.south) -- ++(0,-0.25) -| (jasmin);
+        \draw(rosalinde.south) -- ++(0,-0.25) -| (jasmin);
+
+        \draw(dieter.south) -- ++(0,-0.25) -| (flo);
+        \draw(jasmin.south) -- ++(0,-0.25) -| (flo);
+    \end{scope}
+\end{tikzpicture}
+\end{minipage}\medskip\newline
+\textit{Bonus: Lasse doch eine Ente auch ihre Kinder speichern - hierbei soll im Konstruktor jeweils die Liste/das Array der Kinder von Vater und Mutter erweitert werden. Schreibe dann eine Methode \bjava{getSiblings()} die die Geschwister einer Ente auflistet.}
+
+\begin{solution}
+    Der Code für diese Aufgaben befindet sich in drei verschiedenen Dateien: \aTask{middle}{A38_Stammbaum.java}, sowie \aTask{middle}{A38_EntenListe.java} und \aTask{middle}{A38_Ente.java}. Wir werden hier zuerst die notwendigen Hilfsmethoden abarbeiten, bevor ich zur eigentlichen \say{Attraktion} (\bjava[add to literate={A38_Ente}{{\solGet{keywordC}{A38\_Ente}}}8]{printStammbaum(A38_Ente)}) gelange.
+    \paragraph{Das Prinzip einer Liste:}
+    In dieser Aufgabe basteln wir uns erst einmal eine Liste. An sich werden wir uns eine Klasse konstruieren, die ein Array für uns verwaltet, welches dynamisch mit unseren Bedürfnissen wachsen und Schrumpfen kann. Eine ähnliche (naja, das ist schon anmaßend, sagen wir, im Kerngedanken) Implementation ist bereits durch die Klasse \bjava{ArrayList} gegeben, die wir hier allerdings nicht verwenden. Ich werde hier nicht genau auf die Implementation eingehen, da die Funktionsweise der Methoden bereits Im Tutorium zu Übungsblatt \(7\) von mir im Rahmen der Präsenzaufgabe besprochen wurde (Siehe hier: \attachDocumentText{../Studenten-Share/folien8_ub_7_references_equals.pdf}{\pc{} \detokenize{folien8_ub_7_references_equals.pdf}}). Hier also nur die Sammlung der Methoden die wir im Folgenden verwenden können.
+    \bgroup
+        \lstset{add to literate={A38_Ente}{{\solGet{keywordC}{A38\_Ente}}}8}
+        \begin{multicols}{2}
+        \begin{itemize}
+            \item \bjava{size()} Liefert die Länge der Liste.
+            \item \bjava{get(int)} Liefert das \(i\)-te Element.
+            \item \bjava{append(A38_Ente)} Fügt eine Ente der Liste hinzu.
+            \item \bjava{removeFirst()} Entfernt die erste Ente und liefert sie zurück.
+            \item \bjava{removeLast()} Entfernt die letzte Ente und liefert sie zurück.
+            \item \bjava{contains(A38_Ente)} prüft ob die Ente in der Liste enthalten ist.
+        \end{itemize}
+        \end{multicols}
+        Für die Funktionalität der letzten Methode fügen wir noch eine \bjava{equals()}-Methode in \bjava{A38_Ente} an. Auf sie wollen wir hier auch nicht weiter eingehen. \notetext{Übrigens: Eine solche Listenimplementation muss natürlich nicht für jeden Datentyp geschrieben werden. Java bietet hierfür das Prinzip der \say{Generics} an, bei dem man einen Platzhalterdatentyp definiert, der dann in der Liste verwaltet wird. Über \say{Interfaces} kann dann geregelt werden, welche Schnittstellen dieser Datentyp bieten muss - so funktioniert übrigens auch das Iterieren mittels Javas \say{foreach}. Hierfür wird das \solGet{keywordC}{iterable}-Keyword benötigt!}
+
+        \paragraph{Den Stammbaum ausgeben:}
+        Nun möchten wir den Stammbaum ausgeben. Hier treffen wir die Annahme, dass eine Ente entweder beide Elternteile besitzt, oder keinen. Weiter geht diese Lösung davon aus, dass die Zweige des jeweiligen Elterneteils ebenfalls ausbalanciert sind. Dies lässt sich sehr leicht ändern (in dem man zum Beispiel für jede Ente speichert, in welcher Generation sie lebt), soll aber hier nicht unser Problem sein. Wir wollen uns nur ansehen wie wir den Stammbaum \say{traveriseren} also durchlaufen können. So dass wir zu Ende jedes Element besucht haben. Umgesetzt wurde dies hier durch einen nicht-rekursiven Ansatz, der grob folgendem Ansatz folgt:
+        \begin{enumerate}[nolistsep]
+            \item Füge die Startente der Durchsuchliste hinzu.
+            \item \label{enum:duckstp2}Entferne die erste Ente aus der Durchsuchliste und füge sie der Ausgabeliste hinzu.
+            \item Prüfe ob die soeben entnommene Ente Eltern hat. Wenn ja, füge diese der Durchsuchliste hinzu.
+            \item Springe, sofern die Liste nicht leer ist zum \ref{enum:duckstp2}. Punkt.
+        \end{enumerate}
+        Anschließend haben wir eine Liste aller Verwandten die wir nun nur noch für die Ausgabe aufbereiten müssen. \notetext{Die Traversierung die wir hier betrieben haben, wird übrigens \say{Breitensuche} genannt, da wir zuerst jeweils alle Enten auf einer Generation also auf einer Ebene des Baumes durchlaufen.}
+        \paragraph{Kinder verwalten}
+        Hier noch kurz das Prinzip, wie wir auch die Kinder einer jeden Ente erhalten:
+        \begin{itemize}[nolistsep]
+            \item Jede Ente hält eine \solGet{keywordC}{A38\_EntenListe} ihrer Kinder, die leer initialisiert wird.
+            \item Im Konstruktor mit Eltern (\bjava{A38_Ente(String, int, A38_Ente, A38_Ente)}) greifen wir nun auf die Kinder-Listen der Eltern zu und fügen die soeben Erstellte Ente (mittels \bjava{this}) hinzu
+        \end{itemize}
+        Und das wars dann auch schon!
+    \egroup
+\end{solution}
+%
+%
+% ..######...######..##.....##.##......##.########.########.
+% .##....##.##....##.##.....##.##..##..##.##.......##.....##
+% .##.......##.......##.....##.##..##..##.##.......##.....##
+% ..######..##.......#########.##..##..##.######...########.
+% .......##.##.......##.....##.##..##..##.##.......##...##..
+% .##....##.##....##.##.....##.##..##..##.##.......##....##.
+% ..######...######..##.....##..###..###..########.##.....##
+%
+%
+
+\section{Schwere Aufgaben}
+
+\textit{Dieser Abschnitt enthält eine Ansammlung komplexerer oder allgemein schwierigerer Aufgaben. Sie müssen sich untereinander auch nicht auf vergleichbaren Stufen befinden.}
+
+\subsection{Ein Sudoku-Löser}
+
+Schreibe ein Programm welches ein Sudoku lösen kann. Das Sudoku soll hierbei Zeilenweise eingelesen werden, wobei nicht gefüllte Felder mit
+einer $0$ (Null) gekennzeichnet werden. Also zum Beispiel:\smallskip\newline
+\begin{minipage}{0.5\linewidth}
+\begin{void}
+094010000
+005060001
+080520000
+060003700
+900000018
+417092635
+000030090
+050080060
+020706384
+\end{void}
+\end{minipage}\begin{minipage}{0.5\linewidth}
+\centering \begin{tabular}{ccc|ccc|ccc}
+&9&4&&1&&&&\\
+&&5&&6&&&&1\\
+&8&&5&2&&&&\\\hline
+&6&&&&3&7&&\\
+9&&&&&&&1&8\\
+4&1&7&&9&2&6&3&5\\\hline
+&&&&3&&&9&\\
+&5&&&8&&&6&\\
+&2&&7&&6&3&8&4\\
+\end{tabular}
+\end{minipage}\par
+\textit{Hinweis: Sudokus zum Üben können von einem beliebigen Sudoku-Generator aus dem Internet gegriffen werden \Smiley.}\par{}
+\textit{Wem danach noch langweilig ist, unter Weihnachtsbaum, der kann auch einen Sudoku-Generator selbst schreiben. Wobei dieser natürlich nur lösbare Sudokus generieren soll.}\par{}
+
+\begin{solution}
+    Hierfür habe ich bereits einen Lösungsvorschlag erhalten, bin allerdings noch nicht zur Aufarbeitung gekommen.
+\end{solution}
+
+\subsection{Ein Schach (im Terminal)}
+Die folgende Aufgabe ist in ihrer Natur komplexer und benötigt zumindest grundlegende Kenntnisse in der Verwendung von Klassen. \textit{Vorweg: Es muss kein Computer geschrieben
+werden, es geht um ein zwei Spieler-Schach welches es ermöglicht zwei Personen an einer
+Konsole gegeneinander Schach zu spielen. Zur optischen Aufbereitung können die im Folgenden nahegelegten ANSI-Escape-Codes Verwendung finden:}\par
+\paragraph{Mit ANSI-Escape-Codes:}
+Für den folgenden Teil kann es nützlich/hilfreich sein ANSI-Escape Sequenzen zu kennen. Diese müssen auf Windows-Distributionen unter Umständen noch aktiviert werden wobei dies mit Windows $10$ nur noch ein Klick in eine Box getan sein sollte\footnote{\url{https://stackoverflow.com/questions/16755142/how-to-make-win32-console-recognize-ansi-vt100-escape-sequences\#16799175}}.\par{}
+Grundlegend handelt es sich bei einer ANSI-Escape Sequenz um eine durch \bjava{\\033[}
+angeführte Kontrollsequenz an der die anschließende Kodierung eine besondere Bedeutung im
+Terminal erhält. Eine volle Liste findet sich hier: \url{https://en.wikipedia.org/wiki/ANSI_escape_code}, vermutlich werden allerdings die Folgenden ausreichen:
+\begin{multicols}{2}
+    \begin{itemize}
+        \item \say{\bjava{\\033[0m}} zum Zurücksetzen aktueller Stile
+        \item \say{\bjava{\\033[30m}} für schwarze Schrift.
+        \item \say{\bjava{\\033[47m}} für einen weißen Hintergrund.
+        \item \say{\bjava{\\033[H\\033[2J}} zum leeren des Bildschirms.
+    \end{itemize}
+\end{multicols}
+So sollte zum Beispiel:
+\begin{java*}
+System.out.println("\033[35mHallo\033[0m Welt");
+\end{java*}
+\say{Hallo} in Magenta (eine Konsole kann die Farben anders belegen) und \say{Welt} in normalem Text setzen.
+\paragraph{Ohne ANSI-Escape-Codes:}
+Sollte dies nicht auf Anhieb/oder auch durch Nachfragen nicht funktionieren, oder einfach nicht gewünscht sein, so lässt sich die Aufgabe natürlich auch ohne diese Umsetzen.
+Dann sollte man aber zumindest ein paar Leerzeilen zwischen die jeweiligen Züge packen, 
+damit man die jeweiligen Zustände gut voneinander trennen kann.
+
+\paragraph{Anforderungen:}
+Zu Beginn und nach der Eingabe eines gültigen Zuges soll jeweils das Feld angezeigt werden.
+Hierbei sollen die Zeilen und Spalten sowohl oben und unten als auch links und rechts angezeigt werden. Die einzelnen Figuren können mittels Unicode dargestellt werden, durch ihre offizielle Schachnotation\footnote{\url{https://de.wikipedia.org/wiki/Schachnotation}}.\par{}
+
+Nun soll in jedem Zug der jeweilige Spieler einen Zug angeben, wobei das Programm prüfen soll, ob der Zug gültig ist und ihn nur auch dann ausführen, wenn der Zug valide ist. Zum Beispiel nicht gültig soll sein: \begin{itemize}[nolistsep]
+    \item Einen Bauer der ohne zu Schlagen diagonal zu ziehen.
+    \item Den König nicht aus dem Schach zu befreien.
+    \item Eine Rochade durchzuführen, wenn der König bereits gezogen hat.
+\end{itemize}
+Die validen Züge sollten sich hier: \url{https://www.wiki-schacharena.de/index.php/Schachregeln_f%C3%BCr_Einsteiger} nachvollziehen lassen, auch \say{en passant} soll möglich sein.\par{}
+\textit{Hinweis: Wie die Züge angegeben werden müssen bleibt dem Programmierer überlassen,
+sofern er sie eindeutig angibt. Ob der Zug nun also als 'A3-B4' notiert wird, oder als \say{\T{axb4}} ist nicht relevant.}
+
+\begin{solution}
+    Hierfür steht eine Lösung aus.
+\end{solution}
+
+\subsection{Überrasche mich}
+
+Du kannst natürlich deine eigene Aufgabe erfinden. Sei es etwas, das dich im echten Leben weiter bringt (wie ein Programm zur Vereinfachung von DKNF/KKNF welches passender Weise direkt \LaTeX-Code generiert) oder dir einfach nur tierisch (hihi, quaaack) Spaß macht. Das gilt nicht nur für das Weihnachtsblatt, so etwas kann man einfach immer machen \Laughey. Weitere Ideen: \say{Conway's Game of Life}, ein \say{Stundenplangenerator}, ein Taschenrechner, der neben \T{+}, \T{-}, \T{*} und \T{/} auch Klammersetzung, Modulo, Wurzel und Exponent beherrscht.
+
+\end{document}
