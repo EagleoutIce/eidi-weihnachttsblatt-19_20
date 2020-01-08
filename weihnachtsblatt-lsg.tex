@@ -86,6 +86,11 @@ Dieses Übungsblatt wurde von mir (Florian Sihler) als freiwilliges Übungsangeb
 Alle Codes die hier gezeigt/erklärt oder angerissen werden, sind der PDF-Datei selbst noch einmal
 angehängt, wobei die diversen Kommilitonen, welche mir bei der Programmierung einige Arbeit abgenommen haben dort jeweils vermerkt sind. Um die Dateien zu öffnen wird ein PDF-Viewer benötigt, welcher Anhänge unterstützt (was für eigentlich alle gängigen zutrifft). Sollte ein Anklicken der jeweiligen Markierung wie diese für \aJava{Test.java} nicht möglich sein, so empfiehlt es sich einen Viewer wie den Adobe Acrobat Reader, Okular, Evince oder Xodo zu verwenden\footnote{Hier wurde mir die Funktionalität bereits bestätigt \Laughey}. 
 
+\begin{center}
+    Fragen, Anmerkungen, Lob, Kritik und Fehlerkorrekturen bitte an:\\
+        \mail{florian.sihler@uni-ulm.de}
+\end{center}
+
 \begin{solution}
     In solchen Abschnitten befinden sich die jeweiligen Anmerkungen, Kommentare und Programmausschnitte zur jeweiligen Aufgabe. Abseits weiterer Rechtschreibkorrekturen wurden keine Veränderungen an den Aufgabenstellungen des folgenden Dokuments vorgenommen. Ach ja, alle hier aufgeführten Codes sowie der Quellcode für dieses Dokument befinden sich auch auf Github und können dort somit ebenfalls wiedergefunden werden! Einfach klicken, besternen, oder wie auch immer: \url{https://github.com/EagleoutIce/eidi-weihnachttsblatt-19_20}.
 \end{solution}
@@ -192,7 +197,7 @@ static String parseEingabe(String eingabe) {
     eingabe = eingabe.toLowerCase(); // Kleinbuchstaben reichen
     for (char x : eingabe.toCharArray()) {
         // Buchstaben check
-        if ((x > 'a' && x < 'z')) // Ist Zeichen
+        if (x >= 'a' && x <= 'z') // Ist Zeichen
             result += x;
         if (x == 'ä' || x == 'ö' || x == 'ü') // Ist Umlaut
             result += x;
@@ -386,6 +391,7 @@ public String toString() {
 %
 %
 
+\clearpage{}
 \section{Mittelschwere Aufgaben}
 
 \textit{Dieser Abschnitt enthält eine Ansammlung eher aufwändigerer Aufgabenstellungen. Auch hier gilt: dokumentieren ist die halbe Miete.}
@@ -831,6 +837,9 @@ public A36_State getWinner(){
 \end{java}
 }
 \paragraph{Spielbäume:}
+\begin{center}
+    Der folgende Abschnitt soll einen ersten Einblick in die Konstruktion von Spielbäumen grundlegend erklären. Es handelt sich nicht um eine vollständige Erklärung die so auch viel Länger dauern würde \Laughey.
+\end{center}
 Bevor wir uns damit beschäftigen möchten, wie die KI selbst funktioniert, wollen wir uns mit Spielbäumen befassen. An sich ist ein Spielbaum ein (überraschung) Baum, der verschiedene Situationen des Spiels darstellt. Im Kontext unseres Tic-Tac-Toe-Spiels präsentiert jeder Knoten einen Zustand des Spielfelds und eine Kante den Zug den wir durchführen. Nehmen wir einmal den Spielbaum für das Ausgangsfeld, bei dem nun der Nutzer den ersten Zug machen darf, es ist in 
 \begin{figure}[tbhp]
     \centering\begin{tikzpicture}[scale=0.75, every node/.style={transform shape}]
@@ -888,15 +897,15 @@ Simpel gesagt schlüsselt der Spielbaum also einfach nur alle Möglichkeiten auf
             \fi
         }
         \foreach \i/\xi in {2/2,6/3,8/4}{
-            \def\sX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@cs!15!white}{O}\else##1\fi}
-            \def\dX##1{\ifnum\i=##1 \bfseries O\else O\fi}
-            \def\dsX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@akzent!25!white}{\bfseries O}\else##1\fi}
-
+            \def\sX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@cs!15!white}{X}\else##1\fi}
+            \def\dX##1{\ifnum\i=##1 \bfseries X\else X\fi}
+            \def\dsX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@akzent!25!white}{\bfseries X}\else##1\fi}
+                
             \node (l\i) at(2.5*\xi,-7) {
                 \begin{tabular}{c|c|c}
-                    X & \sX{2} & X \\\hline
+                    \dX{2} & \dsX{2} & \dX{2} \\\hline
                     X & O & \sX{6} \\\hline
-                    \dX{8} &\dsX{8} & \dX{8}
+                    O &\sX{8} & O
                 \end{tabular}
             };
         }

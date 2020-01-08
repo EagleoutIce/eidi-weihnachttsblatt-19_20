@@ -52,7 +52,7 @@ public class A24_Palindrome {
         eingabe = eingabe.toLowerCase(); // Kleinbuchstaben reichen
         for (char x : eingabe.toCharArray()) {
             // Buchstaben check
-            if ((x > 'a' && x < 'z')) // Ist Zeichen
+            if (x >= 'a' && x <= 'z') // Ist Zeichen
                 result += x;
             if (x == 'ä' || x == 'ö' || x == 'ü') // Ist Umlaut
                 result += x;
