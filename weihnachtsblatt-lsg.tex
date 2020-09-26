@@ -3,7 +3,7 @@
 
 \usepackage{enumitem,mathtools,multicol,tikzducks,tikzsymbols,fontawesome}
 
-\usepackage{sopra-listings}
+\usepackage[upshape]{sopra-listings}
 \usepackage[nousefa]{sopra-attachments}
 
 \title{Einführung in die Informatik}
@@ -34,44 +34,13 @@
 
 \newenvironment{solution}{\null\par\noindent\textbf{\textcolor{sob@col@uulm@cs}{Lösung:}}\newline\bgroup\color{black}\slshape\ignorespaces}{\egroup}
 
-% \attachfilesetup{author=Florian Sihler}
-
 \begin{document}
     
 \maketitle
 
-% too great to miss: https://tex.stackexchange.com/questions/387047/the-duck-pond-showcase-of-tikz-drawn-animals-ducks
 \begin{tikzpicture}[overlay,remember picture]
     \node at ($(current page.north east)+(-3.75cm,-7.25cm)$) {\begin{tikzpicture}[scale=0.75]
-        \duck[santa=red!80!black, jacket=red!80!gray, tshirt=white,water];
-
-%This prompts the beard%
-\fill[white!80!brown](1.3,1.3) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (1.2,1.15) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.5,1.05) ellipse (0.1 and 0.1);
-\fill[white!80!brown](0.525,0.90) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.525,0.75) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.65,0.65) ellipse (0.14 and 0.14);
-\fill[white!80!brown] (0.75,0.75) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.85,0.85) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.95,0.95) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (1.05,1.05) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (1.15,1.25) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (1,1.20) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.85,1.20) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.75,1.15) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.65,1.10) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.58,1.07) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.42,1.46) ellipse (0.07 and 0.07);
-\fill[white!80!brown] (0.52,1.45) ellipse (0.07 and 0.07);
-\fill[white!80!brown] (0.6,1.44) ellipse (0.07 and 0.07);
-\fill[white!80!brown] (0.68,1.40) ellipse (0.07 and 0.07);
-\fill[white!80!brown] (0.76,1.36) ellipse (0.07 and 0.07);
-\fill[white!80!brown] (0.8,1.25) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.85,1.28) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (0.38,1.44) ellipse (0.05 and 0.05);
-\fill[white!80!brown] (1,1.28) ellipse (0.12 and 0.12);
-\fill[white!80!brown] (1.3,1.3) -- (0.5,1.05) -- (0.65,0.65) -- cycle;
+        \duck[santa=red!80!black, jacket=red!80!gray, tshirt=white,beard=white!80!brown,water];
     \end{tikzpicture}};
 \end{tikzpicture}
 
@@ -125,7 +94,7 @@ Gerne kannst du die Methode mit einer Eingabe im Terminal verknüpfen!
 
 \begin{solution}
     Der Code für die Lösung befindet sich hier: \aTask{easy}{A21_Schaltjahrpruefer.java}, wobei die einzige relevante Methode \bjava{istSchaltjahr(int)} ist:
-    {\upshape\ijava[linerange={32-40},firstnumber=32]{easy/A21_Schaltjahrpruefer.java}}
+    \ijava[linerange={32-40},firstnumber=32]{easy/A21_Schaltjahrpruefer.java}
     und der Ablauf der Abfragen entspricht den Bedingungen: \begin{itemize}[nolistsep]
         \item Ob eine Jahreszahl durch \(4\) ganzzahlig teilbar ist, prüfen wir mittels: \bjava{jahr \% 4:ws:== 0}
         \item Säkularjahre schließen wir durch den ersten Teil der folgenden \bjava{if}-Bedingung aus: \bjava{jar \% 100:ws:== 0}
@@ -142,8 +111,7 @@ Programmiere einen Primzahlfinder, der das \emph{Sieb des Eratosthenes} verwende
 \begin{solution}
     Der Code für die Lösung befindet sich hier: \aTask{easy}{A22_Primzahlfinder.java}, wobei sich alles wichtige in der \T{main}-Methode abspielt. Sei uns also das Array \bjava{prime[N]} gegeben, welches durchweg auf \bjava{true} gesetzt ist. Es genügt beim durchgehen alle Zahlen bis \(\sqrt{N}\)
     zu betrachten da wir dann (\(\sqrt{N}^2 = N\)) alle möglichen Vielfachen gestrichen haben. Wir gehen also alle Elemente des Arrays von \(1\) bis \(\sqrt{N}\) durch, prüfen ob sie auf \bjava{true} stehen und setzen alle vielfachen des Indizes auf \bjava{false}:
-    {\upshape
-    \begin{java}[firstnumber=35]
+\begin{java}[firstnumber=35]
 for (int i = 2; i < Math.sqrt(prime.length); i++) {
     if (prime[i]) {// Ist Primzahl
         // Markiere alle Vielfachen als "keine Primzahl"
@@ -152,8 +120,7 @@ for (int i = 2; i < Math.sqrt(prime.length); i++) {
         }
     }
 }
-    \end{java}
-    }
+\end{java}
     Anschließend reicht es, über alle Elemente zu iterieren und die Indizes \bjava{i} auszugeben, bei denen \bjava{prime[i]} auf \bjava{true} gesetzt ist.
 \end{solution}
 
@@ -166,8 +133,7 @@ Schreibe eine Funktion, die einen Integer erhält und die Quersumme von diesem b
     Der Code für die Lösung befindet sich hier: \aTask{easy}{A23_Quersumme.java}, wobei die einzige relevante Methode \bjava{quersummeVon(int)} ist. Hierbei summieren wir die jeweils kleinste Ziffer der Zahl auf (mittels Modulo \(10\)) und teilen die Zahl dann anschließend ganzzahlig durch \(10\) um die kleinst-wertige Ziffer zu verwerfen (die dadurch entstehende Nachkommastelle wird von Java abgeschnitten). Vorweg sei gleich als eine andere Alternative präsentiert: bei der man die Zahl als
     String interpretiert, dann über die einzelnen Zeichen iteriert und ihre Ziffernwerte aufsummiert.\par{}
     Die hier referenzierte Lösung läuft wie folgt ab:
-    {\upshape
-    \begin{java}[firstnumber=30]
+\begin{java}[firstnumber=30]
 static int quersummeVon(int eingabe) {
     int result = 0;
     while (eingabe > 0) {
@@ -176,8 +142,7 @@ static int quersummeVon(int eingabe) {
     }
     return result;
 }
-    \end{java}
-    }
+\end{java}
     \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A23_Quersumme} beliebig viele Zahlen durch Leerfelder getrennt angereiht werden, für die dann jeweils die Quersumme berechnet wird.
 \end{solution}
 
@@ -190,8 +155,7 @@ Schreibe eine Funktion (oder auch zwei verschiedene \Winkey), die bei einer übe
 \begin{solution}
     Der Code für die Lösung befindet sich hier: \aTask{easy}{A24_Palindrome.java}, wobei wir hier zwei relevante Methoden haben. Zum einen \bjava{istPalindrom(String)} und zum anderen \bjava{parseEingabe(String)}. \par{}
     Wir betrachten zuerst die Vorbereitung der jeweiligen Eingabe. Da die Aufgabe nicht genau spezifiziert, welche zeichen übernommen werden sollen, einigen wir uns auf die Buchstaben \T{a} bis \T{z} sowie die drei deutschen Sonderzeichen \T{ä}, \T{ö} und \T{ü} (dies lässt sich aber natürlich leicht erweitern). Zuerst wird die Eingabe in Kleinbuchstaben konvertiert, anschließend wird für jedes Zeichen geprüft, ob es für ein Palindrom Relevanz besitzt. Anstelle der Werte der ASCII-Tabelle verwenden wir hier die Zeichen selbst, da Java diese für den Vergleich ohnehin in einen Integer konvertiert und der Quellcode so um einiges lesbarer wird:
-    {\upshape
-    \begin{java}[firstnumber=50]
+\begin{java}[firstnumber=50]
 static String parseEingabe(String eingabe) {
     String result = "";
     eingabe = eingabe.toLowerCase(); // Kleinbuchstaben reichen
@@ -204,8 +168,7 @@ static String parseEingabe(String eingabe) {
     }
     return result;
 }
-    \end{java}
-    }
+\end{java}
     Diese Methode wird nun von \bjava{istPalindrom(String)} verwendet, wobei wir mit dem Ergebnis wie folgt vorgehen:\begin{enumerate}[nolistsep]
         \item Da bei einer ungeraden Eingabelänge das mittlere Zeichen egal ist, genügt es über die Hälfte der Zeichen zu iterieren.
         \item Wir vergleichen nun bis zur Hälfte der Eingabe ob das \(i\)-te Zeichen dem \say{\(\text{length}-i - 1\)}-ten entspricht, also beispielsweise das erste Zeichen dem letzten entspricht.
@@ -213,8 +176,7 @@ static String parseEingabe(String eingabe) {
         \item Sind wir an der \say{Mitte} angekommen und alle Buchstaben sind gleich geben wir \bjava{true} zurück, da die Eingabe dann ein Palindrom ist.
     \end{enumerate}
     Im Code präsentiert sich dies wie folgt:
-    {\upshape
-    \begin{java}[firstnumber=34]
+\begin{java}[firstnumber=34]
 static boolean istPalindrom(String eingabe) {
     eingabe = parseEingabe(eingabe);
     for (int i = 0; i < eingabe.length() / 2; i++) {
@@ -223,8 +185,7 @@ static boolean istPalindrom(String eingabe) {
     }
     return true;
 }
-    \end{java}
-    }
+\end{java}
     \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A24_Palindrome} beliebig viele Eingaben durch Leerfelder getrennt angereiht werden, die dann jeweils auf die Palindromeigenschaft geprüft werden. Sätze können in (doppelten) Anführungszeichen (analog zu Java) eingeschlossen werden. Beispiel:
     \cjava[morekeywords={java}]{java A24_Palindrome "regallAger":ws:"hallo welt":ws:"AN+NA++" }\,.
 \end{solution}
@@ -251,30 +212,27 @@ Das römische System verwendet Zahlzeichen für die Darstellung bestimmter numer
 
 \begin{solution}
     Der Code für die Lösung befindet sich hier: \aTask{easy}{A25_Zahlenumrechner.java}, wobei wir sogar drei relevante Methoden haben. Zum einen \bjava{fromAtoDec(String,int)} weiter \bjava{fromDecToB(String,int)} sowie \bjava{fromDecToRom(String)}. Wir beginnen mit der Konvertierung ins Dezimalsystem wobei wir einfach Schema F in Java übernehmen und den String von Hinten her traversieren:
-    {\upshape
-    \begin{java}[firstnumber=37]
+\begin{java}[firstnumber=37]
 public static int fromAtoDec(String A, int baseA){
     int decimal = 0;
     // Wir Iterieren (von Hinten) über die Zeichen des Strings:
     char[] arr = A.toUpperCase().toCharArray(); // Damit in HEX egal
-    for (int i = arr.length-1; i >= 0; i--) {// Von Hinten
+    for (int i = arr.length-1; i >= 0; i--) { // Von hinten
         // Prüfe ob "Zahl":
         int digit = 0 ;
         if(arr[i] >= '0' && arr[i] <= '9')
             digit = arr[i] - '0'; // '0' = 0, '1' = 1, ...
         else if(arr[i] >= 'A' && arr[i] <= 'F')
             digit = arr[i] - 'A' + 10; // 'A' = 10, 'B' = 11, ....
-        decimal += digit * Math.pow(baseA,arr.length-i-1);// Ziffer * Basis^Stelle
+        decimal += digit * Math.pow(baseA,arr.length-i-1); // Ziffer * Basis^Stelle
     }
     return decimal;
 }
-    \end{java}
-    }
+\end{java}
     Für das Konvertieren von Dezimal zu einer beliebigen Basis machen wir einen Test, ob die
     römische gewünscht ist. In diesem Fall habe ich eine Konstante definiert und verwende dann
     folgenden Code für die Konvertierung:
-    {\upshape
-    \begin{java}[firstnumber=59]
+\begin{java}[firstnumber=59]
 public static String[] roman_chars = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
 public static int[] roman_values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
 public static String fromDecToRom(int A){
@@ -288,17 +246,15 @@ public static String fromDecToRom(int A){
     }
     return result;
 }
-    \end{java}
-}
+\end{java}
     Die normale Konvertierung gestaltet sich als recht einfach, wir konkatennieren jeweils den ganzzahligen Rest der Division durch die Basis an die Zeichenkette heran. So wie es das Konvertieren durch Division diktiert:
-    {\upshape
 \begin{java}[firstnumber=81,morekeywords={[4]{ROM}}]
 public static String fromDecToB(int A, int baseB){
     if(baseB == ROM /* = -1 */ ) return fromDecToRom(A);
     // Teile A sukzessiv durch base B und konkatiniere Reste
     String result = ""; 
     int remainder = 0;
-    while(A > 0) {// Es gibt noch was zu teilen
+    while(A > 0) { // Es gibt noch was zu teilen
         remainder = A % baseB;
         if(remainder >= 10)
             remainder += -10 + 'A'; // 10 = 'A', 11 = 'B', ...
@@ -308,8 +264,7 @@ public static String fromDecToB(int A, int baseB){
     }
     return result;
 }
-    \end{java}
-    }
+\end{java}
     \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A25_Zahlenumrechnen} beliebig viele Eingaben durch Leerfelder getrennt angereiht werden, die dann jeweils in alle möglichen Basen konvertiert werden. Die Basis der Zahl kann in Java-Notation angegeben werden. So notiert das Präfix \say{\T{0x}} eine Hex- \say{\T{0o}} eine Oktal- und \say{\T{0b}} eine Binärzahl (kein Präfix bedeutet, dass es sich um eine Dezimalzahl handelt). Beispiel:
     \cjava[morekeywords={java}]{java A25_Zahlenumrechner 42:ws:|num||cmt|0x|cmt|2A|num|:ws:|num||cmt|0o|cmt|52|num|:ws:|num||cmt|0b|cmt|101010|num| }\,.
 \end{solution}
@@ -350,8 +305,7 @@ für eine Ente mit Eltern wird folgendes Ergebnis gewünscht (\bjava{flo.toStrin
 
 \begin{solution}
     Der Code für die Lösung befindet sich hier: \aTask{easy}{A26_Ente.java}. Wir sammeln zuerst alle notwendigen Attribute, die einer \solGet{keywordC}{Ente} so zu eigen sind. Für die Struktur, heißt die Klasse hier \solGet{keywordC}{A26\_Ente}:
-    {\upshape
-    \begin{java}[firstnumber=10,add to literate={A26_Ente}{{\solGet{keywordC}{A26\_Ente}}}8]
+\begin{java}[firstnumber=10,add to literate={A26_Ente}{{\solGet{keywordC}{A26\_Ente}}}8]
 /// Der Name der Ente
 private String name;
 /// Das Alter der Ente
@@ -360,11 +314,9 @@ private short alter;
 private A26_Ente mama;
 /// Referenz auf eine Papa {@link A26_Ente}
 private A26_Ente papa;
-    \end{java}
-    }
+\end{java}
     Die Konstruktoren \solGet{keywordC}{A26\_Ente}\bjava{(String,int)} und \solGet{keywordC}{A26\_Ente}\bjava{(String,int,}\solGet{keywordC}{A26\_Ente}\bjava{,}\solGet{keywordC}{A26\_Ente}\bjava{)} weisen diese Werte nun einfach zu. Auch die Getter und Setter sind nicht besonders interessant, weswegen es zuletzt nur noch die \bjava{toString}-Methode gibt, die wir betrachten mögen:
-    {\upshape
-    \begin{java}[firstnumber=111,add to literate={A26_Ente}{{\solGet{keywordC}{A26\_Ente}}}8]
+\begin{java}[firstnumber=111,add to literate={A26_Ente}{{\solGet{keywordC}{A26\_Ente}}}8]
 public String toString() {
     if (this.mama == null || this.papa == null) {
         return "Ich heiße " + this.name + " und bin " + this.alter + 
@@ -375,8 +327,7 @@ public String toString() {
                " und mein Vater " + papa.getName() + ".";
     }
 }
-    \end{java}
-    }
+\end{java}
 \end{solution}
 
 %
@@ -423,14 +374,11 @@ Wir möchten nun der Methode \bjava{turing} eine Zeichenkette an diesen Zeichen 
 \textit{Hinweis: Für einen Überblick über die Zuordnungen der ASCII-Tabelle, siehe hier: \url{https://www.torsten-horn.de/techdocs/ascii.htm}}.
 
 \begin{solution}
-    Der Code für die Lösung befindet sich hier: \aTask{middle}{A31_Turing.java}. Es ist nur eine einzige Methode vonnöten, da sich die Maschine - abseits des komplizitierten hineindenkens - echt einfach implementieren lässt. Die Bandlänge sei hierbei in einer Konstante vermerkt, damit wir sie im Zweifelsfall leicht modifizieren können:
-{\upshape
+    Der Code für die Lösung befindet sich hier: \aTask{middle}{A31_Turing.java}. Es ist nur eine einzige Methode vonnöten, da sich die Maschine - abseits des komplizierten hineindenkens - echt einfach implementieren lässt. Die Bandlänge sei hierbei in einer Konstante vermerkt, damit wir sie im Zweifelsfall leicht modifizieren können:
 \begin{java*}[morekeywords={[4]{WORKING_TAPE_SIZE}}]
 public static final int WORKING_TAPE_SIZE = 42;
 \end{java*}
-}
      Der Hauptteil der Methode \bjava{turing(String)} ist nun ein \bjava{switch-case}, welches je nach eingelesenem Zeichen verschieden verfährt. In diesem Fall habe ich die Methode so implementiert, dass die \say{Ausgabe} als \solGet{keywordA}{String} zurückgegeben wird:
-{\upshape
 \begin{java}[firstnumber=35,morekeywords={[4]{WORKING_TAPE_SIZE}}]
 public static String turing(String befehl) {
     //hier wird das Turingband als char-Array simuliert
@@ -462,7 +410,6 @@ public static String turing(String befehl) {
     return output;
 }
 \end{java}
-}
 \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A31_Turing} beliebig viele Zeichenketten durch Leerfelder getrennt angereiht werden, die dann jeweils von der Turingmaschine ausgeführt werden. Die Turingmaschine wird hierbei für jede Zeichenkette \say{zurück gesetzt}/neu konstruiert. Wer als Shell \T{zsh} verwendet (oder im Allgemeinen eine Shell, die dem Ausrufezeichen eine besondere Bedeutung zukommen lässt), sollt die Zeichenkette in einfache Anführungszeichen einschließen. Hier werden diese in der Regel nicht expandiert. Beispiel: \cjava[morekeywords={java}]{java A31_Turing '!+!+!':ws:'+++!+!+!'}.
 \end{solution}
 
@@ -508,7 +455,6 @@ Kannst du den Algorithmus für größere Werte optimieren indem du zum Beispiel 
     \end{itemize}
     Wir betrachten hier die zweite Implementation. Die Erweiterung auf eine Tetranacci-Funktion solle für alle drei Implementationen leicht ersichtlich sein.\par{}
     Wir benötigen ein Array, in dem wir die Werte zwischenspeichern können. Es sei hier durch \bjava{long[] fib_rek_save} notiert. Es ergibt sich:
-{\upshape
 \begin{java}
 public static long fibonacci_rekursiv_save(int N){
     if(N < 0) return -1; // Fehlerfall
@@ -530,13 +476,10 @@ private static long fibonacci_rekursiv_save_helper(int N){
     return fib_rek_save[N]; // Da Fibonacci Zahlen ab N = 1 > 0
 }
 \end{java}
-}
     Diese Variante baut offensichtlich darauf auf, dass die Fibonacci-Zahlen für \(N > 0\) nie Null (\(0\)) sind. Dies kann man selbstredend mit Objekten und \bjava{null} umgehen, es ist hier allerdings
     nicht vonnöten.\par{}
     \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A33_Fibonacci} beliebig viele Zahlen durch Leerfelder getrennt nachgestellt werden, wobei für jede Zahl \(N\) die \(N\)-te Fibonacci Zahl mit jeder der drei Varianten berechnet sowie die Zeit (ungefähr) gemessen wird. Wir können hier auch die Range-Funktion der Bash ausnutzen und so mit \cjava[morekeywords={java}]{java A33_Fibonacci \{25..42\}} alle Fibonacci zahlen von der \(25\)-ten an bis zur \(42\)-ten berechnen. Der Zeitunterschied zwischen den Varianten sollte spätestens für \(N=42\) mehr als deutlich werden.
 \end{solution}
-
-% TODO TODO TODO: MAKE GIT WITH ALL OF THIS INCLUDING TEX-CODE AND STUFF
 
 \subsection{Wer wird Entionär?}
 
@@ -552,15 +495,12 @@ Das Programm soll nun für jede der insgesamt fünf Fragestufen, jeweils verschi
 
 \begin{solution}
     Die Lösung besteht aus zwei verschiedenen Dateien. Einer Hilfsklasse, die uns ein Frage-Objekt modelliert (\aTask{middle}{A34_Question.java}) sowie der Hauptklasse, die den eigentlichen Spielverlauf steuert, sowie den Pool an Fragen definiert. Namentlich: \aTask{middle}{A34_Entionaer.java}. Wir betrachten zuerst die Gestalt einer Frage, wobei es nebst Gettern und Settern nur drei wichtige Attribute gibt:
-{\upshape
 \begin{java}[firstnumber=24]
 private String questionText;
 private String[] answers;
 private int correctAnswer;
 \end{java}
-}
     Sie definiert sich also durch den eigentlichen Fragetext (\bjava{String}), vier verschiedene Antwortmöglichkeiten (\bjava{String[]}) und eine richtige Antwort (\bjava{int}). Natürlich handelt es sich hier nur um eine einfache, geradzu naive Herangehensweise an eine Frage, sie reicht aber im Kontext der Bearbeitung dieser Aufgabe durchaus aus. Interessant ist noch die \bjava{toString()}-Methode, die die Fragen-Klasse überlädt:
-{\upshape
 \begin{java}[firstnumber=96]
 public String toString(){
     String question = this.getQuestionText();
@@ -578,11 +518,9 @@ public String toString(){
     return displayString;
 }
 \end{java}
-}
     Wir formatieren also einfach die Frage und geben die jeweiligen Antwortmöglichkeiten aus, sofern diese nicht mit dem Wert \bjava{null} versehen sind. Letzteres tritt dann ein, wenn eine Frage durch einen Joker ausgeschlossen wird. Hierfür liefert die Klasse auch die Methode \bjava{disableAnswer(int)} die eine Antwort, die nicht die richtige ist, mit dem Wert \bjava{null}.\par{}
     Widmen wir uns aber nun der Hauptklasse. Eine Frageobjekt definieren wir immer gleich, weswegen ich
     hier nur eine exemplarische Frage zeige, mit der dann der Pool an Fragen (ein zweidimensionales Array, wobei die erste Dimension die Schwierigkeit und die zweite die Auswahl an Fragen angibt) gefüllt wird:
-{\upshape
 \begin{java*}[morekeywords={[4]{SUPER\_EASY,ANSWER\_A}},add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]
 question_pool[SUPER_EASY][0] = new A34_Question(
     "Sind Enten knuffig?", 
@@ -594,10 +532,8 @@ question_pool[SUPER_EASY][0] = new A34_Question(
     }, A34_Question.ANSWER_A // <- die richige
 );
 \end{java*}
-}
     Wir iterieren nun also über die fünf Schwierigkeitsstufen des Pools und wählen jeweils eine
     zufällige Frage aus dem Pool. Für diese Frage wird dann \bjava[add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]{askQuestion(A34_Question,int)} aufgerufen. Hier wird die Frage zum einen Ausgegeben und zum anderen die Eingabe des Nutzers verarbeitet. Die Hauptsächliche Fallunterscheidung auf Basis der Nutzereingabe erfolgt also über ein großes \bjava{switch-case}, das wie folgt aufgebaut ist:
-{\upshape
 \begin{java}[firstnumber=106,add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]]
 public static boolean handleInput(char input, int level, 
                                   A34_Question question) {
@@ -627,7 +563,6 @@ public static boolean handleInput(char input, int level,
     return true;
 }
 \end{java}
-}
     Die Methode gibt hierbei zurück, ob der Nutzer ein Level weiter kann (\bjava{true}) oder die Eingabe wiederholen muss (\bjava{false}). Die jeweils hier weiter aufgeführten Methoden führen eigentlich nur die jeweiligen Joker aus. Wer möchte, kann das Spiel komplizierter Gestalten, in dem die Antwortmöglichkeiten immer zufällig ausgegeben werden, es mehr Joker gibt. der aktuelle Geldbetrag angezeigt wird, man Highscores setzen kann, die Fragen aus einer Datei gelesen werden und natürlich noch vieles mehr \Laughey.
 \end{solution}
 
@@ -698,13 +633,11 @@ Das ominöse \bjava{try-catch}-Konstrukt wird später in der Vorlesung noch aufg
         \item die dritte definiert die Reihenfolge, in der die Zeichen im Folgenden definiert werden.
     \end{itemize}
     Ein Beispiel für eine solche \say{Kopfdefinition} der Datei ist folgendes:
-{\upshape
-    \begin{void}
+\begin{void}
 27
 11
  ABCDEFGHIJKLMNOPQRSTUVWXYZ
-    \end{void}
-}
+\end{void}
     Wir werden uns nun mit dem Erstellen einer Schriftart beschäftigen.
     \paragraph{Das Laden einer Schriftart:}
     \bgroup
@@ -716,7 +649,6 @@ Das ominöse \bjava{try-catch}-Konstrukt wird später in der Vorlesung noch aufg
             \item \bjava{String[] lines}: repräsentiert das Schriftzeichen zeilenweise.
         \end{itemize}
         Die Schriftart in der Klasse \bjava{A35_Font} verwaltet nun ein Array an \bjava{A35_Character}, die wir aus der Datei laden. Das Laden läuft nun wie folgt ab:
-{\upshape
 \begin{java}[firstnumber=66]
 String line = reader.readLine();
 int count = Integer.parseInt(line);
@@ -728,10 +660,8 @@ line = reader.readLine();
 for (int i = 0; i < chars.length; i++)
     chars[i] = line.charAt(i);
 \end{java}
-}
 Wir haben nun also alle erwartenden Zeichen in \bjava{chars}. \notetext{Warum muss dann die Anzahl der Zeichen extra angegeben werden? Nun, dies macht uns die Definition etwas einfacher. Durchaus bietet diese Art der Dateiverarbeitung noch einige Möglichkeiten optimiert zu werden. Hier soll nur das Vorgehen erläutert werden.}\par{}
 Nun lesen wir also die Daten für die Schriftzeichen ein:
-{\upshape
 \begin{java}[firstnumber=75]
 A35_Character[] font = new A35_Character[count];
 for(int i = 0; i < count ; i++){// Die Zeichen
@@ -745,9 +675,7 @@ for(int i = 0; i < count ; i++){// Die Zeichen
     font[i] = new A35_Character(font_char, font_data);
 }
 \end{java}
-}
     Wenn das Laden der Schriftart scheitert (weil sie zum Beispiel nicht existiert) laden wir eine Standardschriftart ohne besondere Features:
-{\upshape
 \begin{java}[firstnumber=102]
 public static A35_Font getDefaultFont(){
     // Wir konstruieren die Zeichen
@@ -760,10 +688,8 @@ public static A35_Font getDefaultFont(){
     return new A35_Font(font);
 }
 \end{java}
-}
 \paragraph{Die Hauptroutine:}
 Der Hauptteil des Programms ist nun denkbar einfach. Nachdem die Schriftart in \bjava{A35_Font font} geladen und der Text in \bjava{text} gesetzt ist, läuft die Zeichenroutine wie folgt ab:
-{\upshape
 \begin{java}[firstnumber=32]
 char[] input_chars = text.toCharArray();
 for (int line = 0; line < font.getCharHeight(); line++) {
@@ -779,7 +705,6 @@ for (int line = 0; line < font.getCharHeight(); line++) {
     System.out.println(); // new line
 }
 \end{java}
-}
     Wir iterieren also einfach über die Höhe der Schriftart und dann über jede Zeile der Zeichen die eingegeben wurden. Als weitere Aufgabe kann man versucehn mehrzeilige Ausgaben zu unterstützten.\par{}
     \textit{Hinweis zur Lösung:} Die Lösung erlaubt es direkt über die Kommandozeile den Text zu formatieren. So genügt (wenn die Schriftart \T{test.font} im selben Verzeichnis vorliegt): \cjava[morekeywords={java}]{java A35_ASCII test "HALLO WELT"}\,. Zuerst schreiben wir also dne Namen der Schriftart und dann den Text, den wir angezeigt bekommen möchten.
     \egroup
@@ -815,17 +740,15 @@ Der Computergegner muss nicht gewinnen, aber darf nicht verlieren!\smallskip\\
     \end{itemize}
     \paragraph{Das Spielfeld:}
     Beginnen wir mit der einfachen Implementation. An sich ist das Spielfeld ein eindimensionales, neun-elementiges Array aus Zuständen (\,\solGet{keywordC}{A36\_State}), wobei Zustände nichts anderes sind als Elemente eines Enums die angeben ob das Feld gerade leer (\bjava{EMPTY}) von einem Kreuz (\bjava{CROSS}) oder einem Kreis (\bjava{CIRCLE}) belegt ist. Die Ausgabe ist nun einfach eine iteration über diese Elemente mit grafischer Aufbereitung, wir werden uns im Folgenden nicht weiter mit ihr beschäftigen. Wir wollen uns viel eher ansehen, wie überprüft wird ob es einen Sieger gibt. Hierzu machen wir nämlich keine aufwändige Routine sondern speichern einfach alle Möglichkeiten/Kombinationen in denen eine Siegbedingung vorligen kann (es empfiehlt sich natürlich sich über andere Vorgehensweisen zumindest Gedanken zu machen - es gibt viele mal mehr und mal weniger schöne Vorgehensweisen):
-{\upshape\begin{java*}
+\begin{java*}
 int[][] winStates = {{0,1,2},{3,4,5},{6,7,8}, // Waagerecht
                      {0,3,6},{1,4,7},{2,5,8}, // Senkrecht
                      {0,4,8},{2,4,6} // Diagonal
                     };
-    \end{java*}
-}
+\end{java*}
     Nun reicht es über diese Arrays zu iterieren und zu prüfen, ob die angegebenen Felder den gleichen Zustand besitzen:
 \bgroup
 \lstset{add to literate={A36_State}{{\solGet{keywordC}{A36\_State}}}{9}}
-{\upshape
 \begin{java}[firstnumber=68]
 public A36_State getWinner(){
     for(int[] a : winStates)
@@ -835,12 +758,11 @@ public A36_State getWinner(){
     return A36_State.EMPTY;
 }
 \end{java}
-}
 \paragraph{Spielbäume:}
 \begin{center}
     Der folgende Abschnitt soll einen ersten Einblick in die Konstruktion von Spielbäumen grundlegend erklären. Es handelt sich nicht um eine vollständige Erklärung die so auch viel Länger dauern würde \Laughey.
 \end{center}
-Bevor wir uns damit beschäftigen möchten, wie die KI selbst funktioniert, wollen wir uns mit Spielbäumen befassen. An sich ist ein Spielbaum ein (überraschung) Baum, der verschiedene Situationen des Spiels darstellt. Im Kontext unseres Tic-Tac-Toe-Spiels präsentiert jeder Knoten einen Zustand des Spielfelds und eine Kante den Zug den wir durchführen. Nehmen wir einmal den Spielbaum für das Ausgangsfeld, bei dem nun der Nutzer den ersten Zug machen darf, es ist in 
+Bevor wir uns damit beschäftigen möchten, wie die KI selbst funktioniert, wollen wir uns mit Spielbäumen befassen. An sich ist ein Spielbaum ein (überraschung) Baum, der verschiedene Situationen des Spiels darstellt. Im Kontext unseres Tic-Tac-Toe-Spiels präsentiert jeder Knoten einen Zustand des Spielfelds und eine Kante den Zug den wir durchführen. Nehmen wir einmal den Spielbaum für das Ausgangsfeld, bei dem nun der Nutzer den ersten Zug machen darf.
 \begin{figure}[tbhp]
     \centering\begin{tikzpicture}[scale=0.75, every node/.style={transform shape}]
         \node (0) at(2.5*5,0.75) {
@@ -920,7 +842,6 @@ Simpel gesagt schlüsselt der Spielbaum also einfach nur alle Möglichkeiten auf
     Dies erledigt für uns die Klasse \bjava{A36_Node}. Ein Knoten hält jeweils ein eigenes \bjava{A36_Board}, das den Spielzustand repräsentiert. Weiter muss sie noch einen \bjava{A36_State} halten, damit klar ist, wer nun am Zug ist. Hinzu kommt eine Liste and Kindknoten, repräsentiert durch \bjava{A36_NodeList} die die weiteren Spielzüge bezeichnen.
 \end{minipage}\medskip\newline
 Das Füllen eines solchen Baumes ist ebenfalls leicht. So gehen wir bei der Konstruktion einer neuen \bjava{A36_Node} einfach hin und prüfen ob das übergebene Feld noch weitere Spielzüge zulässt. Wenn ja, rufen wir einfach (und haben damit eine versteckte Rekursion) eine Methode auf, die für jedes noch freie Feld einen neuen Knoten hinzufügt:
-{\upshape
 \begin{java}[firstnumber=50]
 private void generateChildA36!**!_Nodes() {
     for(int i = 0; i < board.board.length; i++)
@@ -929,12 +850,10 @@ private void generateChildA36!**!_Nodes() {
                                     turn.toggle()));
 }
 \end{java}
-}
 Hierbei bezeichnet \bjava{turn}, wer aktuell am Zug ist und \bjava{toggle()} haben wir so geschrieben, dass es den jeweils anderen Spieler zurückgibt. Die \bjava{clone()}-Methode haben wir wider besseren Wissens auch selbst geschrieben um eine Kopie des Spielfeldes zu erhalten und nicht nur die Referenz zu übergeben (wäre ja auch doof, wenn
 alle Möglichkeiten auf das selbe Feld angewendet werden)!
 \paragraph{Den Spielbaum auswerten:}
 Doch wie bewerten wir den Baum den wir da so toll aufgebaut haben jetzt? Wir schreiben uns hierfür eine Methode \bjava{evaluate()} die von einem bestimmten Knoten an versucht die Bewertung auszurechnen. Sie gestaltet sich wie folgt:
-{\upshape
 \begin{java}
 private int evaluate(){
     switch (board.getWinner()){
@@ -950,13 +869,11 @@ private int evaluate(){
     }
 }
 \end{java}
-}
 Aber moooment, hier passiert nun wieder eine ganze Menge! Wir prüfen im Startknoten also folgendes: \say{Gibt es einen Sieger?} Wenn ja ist ja nicht nur das Propagieren nicht nötig, sondern wir können auch gleich abschließen, da ja ohnehin nicht weitergespielt wird. Wir weißen dem Knoten nun also einen festen Wert zu, je nachdem wer gewinnt. Ob das nun \(-42\) und \(42\) ist oder eben wie hier \(-1\) und \(1\) spielt keine Rolle. Es empfiehlt sich lediglich zwei verschiedene Werte zu nehmen (sonst suchen wir ja einfach nur den Knoten wo jemand gewinnt).\par{}
 So weit so gut, aber das Spannende geschieht nun, wenn weder Kreuz noch Kreis gewonnen hat. In diesem Fall müssen 
 wir natürlich noch überprüfen ob ein Unentschieden vorliegt. Ist dies der Fall so entscheiden wir uns für ein \say{neutrales} Element und liefern hier die \(0\) zurück; wenn aber kein Unentschieden vorliegt müssen wir uns die Kindknoten betrachten und hier tritt dann die Mechanik auf, die dem minmax-Algorithmus, den wir hier brav anwenden werden, ihren Namen gibt.\par{}
 Denn was ganz Klar ist: wenn wir Kreis sind und Kreis bei einem Sieg mit dem Wert \(1\) versehen wird, so versuchen wir unsere Gewinnwahrscheinlichkeit zu maximieren, wählen also den Kindknoten mit dem höchsten Wert. Für den Gegner wissen wir aber nicht was er wählen wird, vermutlich ist es allerdings sein Ziel ebenfalls zu Gewinnen (und sonst wäre das ja noch besser für uns \Laughey) wir müssen also in den Knoten wo er am Zug ist, das Kind mit der niedrigsten Bewertung auswählen, da dieses natürlich vom Gegenspieler favorisiert wird. Und so ergibt sich auch die letzte Unterscheidung: Sind wir am Zug (also im Kontext des Spielbaums), so wählen wir den für uns besten (max) Zug, der Knoten erhält also das Gewicht des für uns besten Kindzweiges, analog anders herum: Ist der Gegner am Zug so wählen wir den Kindknoten mit der niedrigsten Bewertung (min): Tadaa! MinMax, oder in der Reihenfolge hier: MaxMin hihi\Laughey!\par{}
 Die Suchmethode könnten wir übrigens wie folgt veranschaulichen:
-{\upshape
 \begin{java}[firstnumber=104]
 private int searchSmallestChilds(){
     A36_Node current = childA36!**!_Nodes.get(0);
@@ -968,7 +885,6 @@ private int searchSmallestChilds(){
     return current.evaluation;
 }
 \end{java}
-}
 Wie sich hierran auch erkennen lässt: die Bewertung eines Knotens speichern wir im Feld \bjava{evaluation}. Die KI muss nun also nur noch für den aktuellen Knoten im Spielbaum das Kind mit der höchsten Bewertung auswählen und ihr Symbol dort platzieren.
 
 \paragraph{Optimierungen:}
@@ -1052,7 +968,7 @@ Peter Erika   Wolfgang Rosalinde
 \begin{solution}
     Der Code für diese Aufgaben befindet sich in drei verschiedenen Dateien: \aTask{middle}{A38_Stammbaum.java}, sowie \aTask{middle}{A38_EntenListe.java} und \aTask{middle}{A38_Ente.java}. Wir werden hier zuerst die notwendigen Hilfsmethoden abarbeiten, bevor ich zur eigentlichen \say{Attraktion} (\bjava[add to literate={A38_Ente}{{\solGet{keywordC}{A38\_Ente}}}8]{printStammbaum(A38_Ente)}) gelange.
     \paragraph{Das Prinzip einer Liste:}
-    In dieser Aufgabe basteln wir uns erst einmal eine Liste. An sich werden wir uns eine Klasse konstruieren, die ein Array für uns verwaltet, welches dynamisch mit unseren Bedürfnissen wachsen und Schrumpfen kann. Eine ähnliche (naja, das ist schon anmaßend, sagen wir, im Kerngedanken) Implementation ist bereits durch die Klasse \bjava{ArrayList} gegeben, die wir hier allerdings nicht verwenden. Ich werde hier nicht genau auf die Implementation eingehen, da die Funktionsweise der Methoden bereits Im Tutorium zu Übungsblatt \(7\) von mir im Rahmen der Präsenzaufgabe besprochen wurde (Siehe hier: \attachDocumentText{../Studenten-Share/folien8_ub_7_references_equals.pdf}{\pc{} \detokenize{folien8_ub_7_references_equals.pdf}}). Hier also nur die Sammlung der Methoden die wir im Folgenden verwenden können.
+    In dieser Aufgabe basteln wir uns erst einmal eine Liste. An sich werden wir uns eine Klasse konstruieren, die ein Array für uns verwaltet, welches dynamisch mit unseren Bedürfnissen wachsen und Schrumpfen kann. Eine ähnliche (naja, das ist schon anmaßend, sagen wir, im Kerngedanken) Implementation ist bereits durch die Klasse \bjava{ArrayList} gegeben, die wir hier allerdings nicht verwenden. Ich werde hier nicht genau auf die Implementation eingehen, da die Funktionsweise der Methoden bereits Im Tutorium zu Übungsblatt \(7\) von mir im Rahmen der Präsenzaufgabe besprochen wurde (Siehe hier: \attachDocumentText{./files/folien8_ub_7_references_equals.pdf}{\pc{} \detokenize{folien8_ub_7_references_equals.pdf}}). Hier also nur die Sammlung der Methoden die wir im Folgenden verwenden können.
     \bgroup
         \lstset{add to literate={A38_Ente}{{\solGet{keywordC}{A38\_Ente}}}8}
         \begin{multicols}{2}
@@ -1085,6 +1001,7 @@ Peter Erika   Wolfgang Rosalinde
         Und das wars dann auch schon!
     \egroup
 \end{solution}
+
 %
 %
 % ..######...######..##.....##.##......##.########.########.
