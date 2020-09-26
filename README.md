@@ -8,7 +8,7 @@ Ich, Florian Sihler, trete jegliche Verantwortung für die Funktionalität sowie
 
 ## Das PDF-Kompilat
 
-Eine (sofern mir möglich) stets aktuelle PDF-Variante des Lösungsblattes findet sich hier auf dem [Uni-Cloudstore](https://cloudstore.uni-ulm.de/s/njrS8CNYEGrKbHb).
+Eine hoffentlich stets aktuelle PDF-Variante des Lösungsblattes findet sich hier auf dem [hier](https://media.githubusercontent.com/media/EagleoutIce/eidi-weihnachttsblatt-19_20/gh-pages/weihnachtsblatt-lsg.pdf) oder [hier](https://github.com/EagleoutIce/eidi-weihnachttsblatt-19_20/blob/gh-pages/weihnachtsblatt-lsg.pdf).
 
 Wem hier Fehler sowohl syntaktischer, semantischer als auch katastrophaler wie unbedeutender Natur auffallen sollen, der darf diese gern selbst korrigieren, oder mir auch mittels einer Email an florian.sihler@uni-ulm.de mitteilen. Bitte in einem solchen Fall 'Fehler im Weihnachtsblatt' oder vergleichbares dem Nachrichtentitel anfügen.
 
