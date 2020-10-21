@@ -35,7 +35,7 @@
 \newenvironment{solution}{\null\par\noindent\textbf{\textcolor{sob@col@uulm@cs}{Lösung:}}\newline\bgroup\color{black}\slshape\ignorespaces}{\egroup}
 
 \begin{document}
-    
+
 \maketitle
 
 \begin{tikzpicture}[overlay,remember picture]
@@ -53,7 +53,7 @@
 Dieses Übungsblatt wurde von mir (Florian Sihler) als freiwilliges Übungsangebot für die Tutorienteilnehmer der Veranstaltung \say{Einführung in die Informatik} im Wintersemester 2019/2020 erstellt. Hierbei handelt es sich um die \say{Musterlösungen}, die eine Vorstellung für die Lösung der einzelnen Aufgaben liefern. Ich verwende \say{\T{du}}, sollten Sie sich in dieser Hinsicht angegriffen fühlen, so bitte ich dies aufrichtigst zu entschuldigen.\par{}
 
 Alle Codes die hier gezeigt/erklärt oder angerissen werden, sind der PDF-Datei selbst noch einmal
-angehängt, wobei die diversen Kommilitonen, welche mir bei der Programmierung einige Arbeit abgenommen haben dort jeweils vermerkt sind. Um die Dateien zu öffnen wird ein PDF-Viewer benötigt, welcher Anhänge unterstützt (was für eigentlich alle gängigen zutrifft). Sollte ein Anklicken der jeweiligen Markierung wie diese für \aJava{Test.java} nicht möglich sein, so empfiehlt es sich einen Viewer wie den Adobe Acrobat Reader, Okular, Evince oder Xodo zu verwenden\footnote{Hier wurde mir die Funktionalität bereits bestätigt \Laughey}. 
+angehängt, wobei die diversen Kommilitonen, welche mir bei der Programmierung einige Arbeit abgenommen haben dort jeweils vermerkt sind. Um die Dateien zu öffnen wird ein PDF-Viewer benötigt, welcher Anhänge unterstützt (was für eigentlich alle gängigen zutrifft). Sollte ein Anklicken der jeweiligen Markierung wie diese für \aJava{Test.java} nicht möglich sein, so empfiehlt es sich einen Viewer wie den Adobe Acrobat Reader, Okular, Evince oder Xodo zu verwenden\footnote{Hier wurde mir die Funktionalität bereits bestätigt \Laughey}.
 
 \begin{center}
     Fragen, Anmerkungen, Lob, Kritik und Fehlerkorrekturen bitte an:\\
@@ -81,7 +81,7 @@ angehängt, wobei die diversen Kommilitonen, welche mir bei der Programmierung e
 \textit{Dieser Abschnitt enthält eine Ansammlung kleiner Aufgabenstellungen. Sie müssen natürlich nicht in zehn Minuten herunter geschrieben werden. Es gilt auch (und vielleicht vor allem) sich die Zeit zu nehmen das
 Kommentieren von Code zu üben oder sich mit Build-Systemen wie \T{make}\footnote{\url{https://www.gnu.org/software/make/}}, \T{maven}\footnote{\url{https://maven.apache.org/}} oder \T{gradle}\footnote{\url{https://gradle.org/}} vertraut zu machen. Auch kann gern eine andere Programmiersprache versucht, oder das Programm gleich in mehreren implementiert werden. Die Lösungen werden allerdings in Java sein und wer eine esoterische Programmiersprache verwendet ist selbst schuld \Winkey.}\par{}
 
-Es sollten keine Komponenten aus der Java-Bibliothek verwendet werden, die die Aufgabe (drastisch) vereinfachen (so zum Beispiel: \bjava[morekeywords={[2]{GregorianCalendar}},morekeywords={[3]{isLeapYear}}]{Java.util.GregorianCalendar.isLeapYear(int)}). 
+Es sollten keine Komponenten aus der Java-Bibliothek verwendet werden, die die Aufgabe (drastisch) vereinfachen (so zum Beispiel: \bjava[morekeywords={[2]{GregorianCalendar}},morekeywords={[3]{isLeapYear}}]{Java.util.GregorianCalendar.isLeapYear(int)}).
 
 \subsection{Schaltjahrprüfer}
 
@@ -97,7 +97,7 @@ Gerne kannst du die Methode mit einer Eingabe im Terminal verknüpfen!
     \ijava[linerange={32-40},firstnumber=32]{easy/A21_Schaltjahrpruefer.java}
     und der Ablauf der Abfragen entspricht den Bedingungen: \begin{itemize}[nolistsep]
         \item Ob eine Jahreszahl durch \(4\) ganzzahlig teilbar ist, prüfen wir mittels: \bjava{jahr \% 4:ws:== 0}
-        \item Säkularjahre schließen wir durch den ersten Teil der folgenden \bjava{if}-Bedingung aus: \bjava{jar \% 100:ws:== 0}
+        \item Säkularjahre schließen wir durch den ersten Teil der folgenden \bjava{if}-Bedingung aus: \bjava{jahr \% 100:ws:== 0}
         \item Da die Säkularjahrregel aber alle \(400\) Jahre keine Anwendung findet, fordern wir noch zusätzlich, dass sich das Jahr durch \(400\) nicht ganzzahlig teilen darf mittels: \bjava{jahr \% 400:ws:!= 0}
     \end{itemize}
     \textit{Hinweis zur Lösung:} Der beigelegte Code erlaubt eine direkte Verwendung über die Kommandozeile. Hier können dem Aufruf \cjava[morekeywords={java}]{java A21_Schaltjahrpruefer} beliebig viele Jahreszahlen durch Leerfelder getrennt angereiht werden, die dann jeweils auf die Eigenschaft \bjava{istSchaltjahr} geprüft werden.
@@ -201,13 +201,13 @@ Schreibe für jede der folgenden Anforderungen eine Funktion, die eine Zahl als 
         \item Dezimal in römische Zahlenschrift.
     \end{enumerate}
 \end{multicols}\vspace*{-0.75\baselineskip}\par
-Die Option für \say{von römischer Zahlen ins Dezimalsystem} ist freiwillig. \textit{Hinweis: Die Darstellung einer Zahl im Binär-, Okal- oder Hexadezimal System erfolgt analog zum Dezimalsystem, wobei für jede Ziffer entweder zwei, acht oder sechzehn Symbole zur Verfügung stehen. Die Wertigkeit ist hierbei für jede Ziffer: \T{Ziffer * Basis\^{}Stelle}. 
+Die Option für \say{von römischer Zahlen ins Dezimalsystem} ist freiwillig. \textit{Hinweis: Die Darstellung einer Zahl im Binär-, Oktal- oder Hexadezimal System erfolgt analog zum Dezimalsystem, wobei für jede Ziffer entweder zwei, acht oder sechzehn Symbole zur Verfügung stehen. Die Wertigkeit ist hierbei für jede Ziffer: \T{Ziffer * Basis\^{}Stelle}.
 So ist zum Beispiel $42_{10}$: \begin{itemize}[nolistsep]
     \item im Binärsystem $101010_{2}$, da: $\impmath{1} \cdot 2^5 + \impmath{0} \cdot 2^4 + \impmath{1} \cdot 2^3 + \impmath{0} \cdot 2^2 + \impmath{1} \cdot 2^1 + \impmath{0} \cdot 2^0 = 42_{10}$.
     \item im Oktalsystem $52_8$, da: $\impmath{5} \cdot 8^1 + \impmath{2} \cdot 8^0 = 42_{10}$.
     \item im Hexadezimalsystem $2A_{16}$, da: $\impmath{2} \cdot 16^1 + \impmath{10} \cdot 8^0 = 42_{10}$. Hinweis, die Ziffernwerte $10$ bis $15$ werden durch die Buchstaben $A$ bis $F$ gekennzeichnet (so entspricht $A\widehat{=}10,\,B\widehat{=}11,\,\ldots,\,F\widehat{=}15$)
 \end{itemize}
-Das römische System verwendet Zahlzeichen für die Darstellung bestimmter numerischer Werte, so repräsentiert \T{I} eine $1$, \T{V} den Wert $5$, \T{X} den Wert $10$, \T{L} den Wert $50$, \T{C} den Wert $100$, \T{D} den Wert $500$ und \T{M} den Wert $1000$. Die einzelnen Werte der Symbole werden summiert, wobei sie positiv gewertet werden, wenn sie in ihrer Wertigkeit absteigend notiert sind und negativ wenn ein Symbol niederern Wertes vor einem mit höheren Wert steht. So ist: \foreach \i in {1,...,10} {$\i_{10}$ = \rom{\i},~} und $42_{10}$ zum Beispiel: ${X}{V}{I}{I} = \underset{X}{(-10)} + \underset{V}{50} + \underset{I}{1} + \underset{I}{1} = 42_{10}$.
+Das römische System verwendet Zahlzeichen für die Darstellung bestimmter numerischer Werte, so repräsentiert \T{I} eine $1$, \T{V} den Wert $5$, \T{X} den Wert $10$, \T{L} den Wert $50$, \T{C} den Wert $100$, \T{D} den Wert $500$ und \T{M} den Wert $1000$. Die einzelnen Werte der Symbole werden summiert, wobei sie positiv gewertet werden, wenn sie in ihrer Wertigkeit absteigend notiert sind und negativ wenn ein Symbol niederen Wertes vor einem mit höheren Wert steht. So ist: \foreach \i in {1,...,10} {$\i_{10}$ = \rom{\i},~} und $42_{10}$ zum Beispiel: ${X}{V}{I}{I} = \underset{X}{(-10)} + \underset{V}{50} + \underset{I}{1} + \underset{I}{1} = 42_{10}$.
 }
 
 \begin{solution}
@@ -247,12 +247,12 @@ public static String fromDecToRom(int A){
     return result;
 }
 \end{java}
-    Die normale Konvertierung gestaltet sich als recht einfach, wir konkatennieren jeweils den ganzzahligen Rest der Division durch die Basis an die Zeichenkette heran. So wie es das Konvertieren durch Division diktiert:
+    Die normale Konvertierung gestaltet sich als recht einfach, wir konkatenieren jeweils den ganzzahligen Rest der Division durch die Basis an die Zeichenkette heran. So wie es das Konvertieren durch Division diktiert:
 \begin{java}[firstnumber=81,morekeywords={[4]{ROM}}]
 public static String fromDecToB(int A, int baseB){
     if(baseB == ROM /* = -1 */ ) return fromDecToRom(A);
-    // Teile A sukzessiv durch base B und konkatiniere Reste
-    String result = ""; 
+    // Teile A sukzessiv durch base B und konkateniere Reste
+    String result = "";
     int remainder = 0;
     while(A > 0) { // Es gibt noch was zu teilen
         remainder = A % baseB;
@@ -319,11 +319,11 @@ private A26_Ente papa;
 \begin{java}[firstnumber=111,add to literate={A26_Ente}{{\solGet{keywordC}{A26\_Ente}}}8]
 public String toString() {
     if (this.mama == null || this.papa == null) {
-        return "Ich heiße " + this.name + " und bin " + this.alter + 
+        return "Ich heiße " + this.name + " und bin " + this.alter +
                " Jahre alt.";
     } else {
-        return "Ich heiße " + this.name + " und bin " + this.alter + 
-               " Jahre alt" + ", meine Mutter heißt " + mama.getName() + 
+        return "Ich heiße " + this.name + " und bin " + this.alter +
+               " Jahre alt" + ", meine Mutter heißt " + mama.getName() +
                " und mein Vater " + papa.getName() + ".";
     }
 }
@@ -352,11 +352,11 @@ public String toString() {
 \textit{Vorab: Eine Programmiersprache erfüllt die Eigenschaft: \say{Turing-Vollständig}, wenn sie sich von einer Turing-Maschine emulieren lässt. Java und die meisten großen Programmiersprachen sind Turing-Vollständig. Das bedeutet wir können sie auch durch eine ganz kleine einfache Maschine ausdrücken: Die von Alan Turing 1936 eingeführte \imptext{Turingmaschine}\footnote{\url{https://de.wikipedia.org/wiki/Turingmaschine}}. Wir wollen uns hier nicht ausführlich mit dieser genialen Entwicklung aufhalten. Es sei nur als Hintergrundinformation gegeben, da wir hier eine solche in Java implementieren werden. Die Turingmaschine besitzt zwar in der Theorie unbegrenzt Speicherplatz, wir werden diesen hier allerdings - aus offensichtlichen Gründen - künstlich begrenzen.}\par{}
 
 Im Folgenden besitzen wir ein Arbeitsband (\emph{working-tape}, hier durch ein Array repräsentiert) mit einer Länge von $42$ Feldern (oder jeder beliebigen anderen Anzahl, länger als $10$ sollte es aber schon sein \Tongey) auf dem sich ein Lese-/Schreib-Kopf (der sogenannte \emph{head}) bewegen kann. Dieser startet auf dem ersten Feld und kann nur nach links oder rechts bewegt werden (und zwar jeweils immer ein Feld weit), wobei wir zur
-\say{Emulation} eines unbegrenzten Speichers einfach festlegen, dass das Arbeitsband einen \say{Kreis} bildet (viel Spaß das in den Gedanken zu modellieren \Laughey), wenn wir also auf dem ersten Feld nach links gehen, landen wir auf dem letzten Feld, und anders herum, wenn wir auf dem letzten Feld nach rechts möchten, landen wir wieder auf dem ersten Feld (\textit{Hinweis: In Array-Notation entspricht das \say{erste Feld} \bjava{tape[0]} und das \say{letzte Feld} \bjava{tape[41]}}). 
+\say{Emulation} eines unbegrenzten Speichers einfach festlegen, dass das Arbeitsband einen \say{Kreis} bildet (viel Spaß das in den Gedanken zu modellieren \Laughey), wenn wir also auf dem ersten Feld nach links gehen, landen wir auf dem letzten Feld, und anders herum, wenn wir auf dem letzten Feld nach rechts möchten, landen wir wieder auf dem ersten Feld (\textit{Hinweis: In Array-Notation entspricht das \say{erste Feld} \bjava{tape[0]} und das \say{letzte Feld} \bjava{tape[41]}}).
 Zu Beginn sei jedes Feld des Arrays/Arbeitsbandes mit $0$ initialisiert. Es empfiehlt sich ein Array aus Zeichen (\bjava{char}) zu machen, da wir so eine für uns lesbare Ausgabe erhalten.\par{}
 Nun möchten wir das Programm auch steuern. Hierzu definieren wir uns fünf verschiedene Kontrollzeichen:
 \begin{description}[nolistsep]
-    \item[\say{\T{>}}] Dieses Zeichen bewegt den Kopf um eins nach rechts 
+    \item[\say{\T{>}}] Dieses Zeichen bewegt den Kopf um eins nach rechts
     \item[\say{\T{<}}] Dieses Zeichen bewegt den Kopf (intuitiver Weise) um eins nach links
     \item[\say{\T{+}}] Dieses Zeichen sorgt dafür, dass die Zahl/das Zeichen auf die/das der Kopf zeigt um eins ($1$) erhöht wird.
     \item[\say{\T{-}}] Dieses Zeichen sorgt dafür, dass die Zahl/das Zeichen auf die/das der Kopf zeigt um eins ($1$) verringert wird.
@@ -386,14 +386,14 @@ public static String turing(String befehl) {
     //und mit dem Buchstaben 'a' ausgefüllt
     for(int i = 0; i < band.length; i++)
         band[i] = 'a';
-        
-    int kopf = 0; // Initilaisiere Kopf
+
+    int kopf = 0; // Initialisiere Kopf
     String output = ""; // Speichere Ausgabe
 
     //jetzt wird der als String übergebene Befehl ausgeführt
     for(int i = 0; i < befehl.length(); i++){
         switch(befehl.charAt(i)){
-            // wenn am Rand des Bandes: stetze Kopf auf das Ende
+            // wenn am Rand des Bandes: setze Kopf auf das Ende
             case '<': kopf = (kopf == 0) ? band.length-1 : kopf-1; break;
             // wenn am Rand des Bandes: setze Kopf auf den Anfang
             case '>': kopf = (kopf == band.length-1) ? 0 : kopf+1; break;
@@ -401,9 +401,9 @@ public static String turing(String befehl) {
             case '-': band[kopf]--; break; // Dekrement
             case '!': output += band[kopf]; break; // Ausgabe
             // der Befehl ist fehlerhaft
-            default: 
+            default:
                 System.err.format("Das Symbol '%c' (i: %d) ist ungültig.%n",
-                    befehl.charAt(i),i); 
+                    befehl.charAt(i),i);
                 return output + "[ERROR]";
         }
     }
@@ -426,7 +426,7 @@ Schreibe für die Turing-Maschine aus \ref{sec:turing} ein Programm, welches ein
     \begin{enumerate}
         \item Entspricht das Zeichen dem letzten Zeichen? \(\Rightarrow\) \say{\T{!}} (ein Zeichen für die Ausgabe ist das Minimum) und zum nächsten gewünschten Zeichen voranschreiten.
         \item Berechne \say{Distanz} des gewünschten Zeichens zum Wert auf den aktuell der Zeiger zeigt. Sei diese Distanz hier \(d\).
-        \item Berechne für alle Felder mit einem Abstand von maximal \(d\) um die aktuelle Zeigerposition, die Distanz zum gewünschten Zeichen. 
+        \item Berechne für alle Felder mit einem Abstand von maximal \(d\) um die aktuelle Zeigerposition, die Distanz zum gewünschten Zeichen.
         \item Berechne nun das Feld bei dem die Summe aus Abstand zum gewünschten Zeichen und zur aktuellen Position am geringsten ist.
         \item Wenn nötig: Bewege Kopf auf dieses Feld (mittels \say{\T{>}} und \say{\T{<}})
         \item Wenn nötig: Wende Inkrement (\T{\say{+}})/Dekrement (\T{\say{-}}) an
@@ -458,12 +458,12 @@ Kannst du den Algorithmus für größere Werte optimieren indem du zum Beispiel 
 \begin{java}
 public static long fibonacci_rekursiv_save(int N){
     if(N < 0) return -1; // Fehlerfall
-    if(N == 0) return 0; // Keine Berechnung nötig 
+    if(N == 0) return 0; // Keine Berechnung nötig
     if(N < 3) return 1; // Keine Berechnung nötig
 
     fib_rek_save = new long[N+1];
-    fib_rek_save[0] = 0; 
-    fib_rek_save[1] = fib_rek_save[2] = 1; 
+    fib_rek_save[0] = 0;
+    fib_rek_save[1] = fib_rek_save[2] = 1;
     return fibonacci_rekursiv_save_helper(N);
 }
 
@@ -471,8 +471,8 @@ private static long fibonacci_rekursiv_save_helper(int N){
     if (N <= 0) return 0; // Ende der Rekursion
     if (fib_rek_save[N] == 0) // Noch nicht berechnet
         // Berechne Wert:
-        fib_rek_save[N] = fibonacci_rekursiv_save_helper(N-1) 
-                          + fibonacci_rekursiv_save_helper(N-2); 
+        fib_rek_save[N] = fibonacci_rekursiv_save_helper(N-1)
+                          + fibonacci_rekursiv_save_helper(N-2);
     return fib_rek_save[N]; // Da Fibonacci Zahlen ab N = 1 > 0
 }
 \end{java}
@@ -500,7 +500,7 @@ private String questionText;
 private String[] answers;
 private int correctAnswer;
 \end{java}
-    Sie definiert sich also durch den eigentlichen Fragetext (\bjava{String}), vier verschiedene Antwortmöglichkeiten (\bjava{String[]}) und eine richtige Antwort (\bjava{int}). Natürlich handelt es sich hier nur um eine einfache, geradzu naive Herangehensweise an eine Frage, sie reicht aber im Kontext der Bearbeitung dieser Aufgabe durchaus aus. Interessant ist noch die \bjava{toString()}-Methode, die die Fragen-Klasse überlädt:
+    Sie definiert sich also durch den eigentlichen Fragetext (\bjava{String}), vier verschiedene Antwortmöglichkeiten (\bjava{String[]}) und eine richtige Antwort (\bjava{int}). Natürlich handelt es sich hier nur um eine einfache, geradezu naive Herangehensweise an eine Frage, sie reicht aber im Kontext der Bearbeitung dieser Aufgabe durchaus aus. Interessant ist noch die \bjava{toString()}-Methode, die die Fragen-Klasse überlädt:
 \begin{java}[firstnumber=96]
 public String toString(){
     String question = this.getQuestionText();
@@ -523,19 +523,19 @@ public String toString(){
     hier nur eine exemplarische Frage zeige, mit der dann der Pool an Fragen (ein zweidimensionales Array, wobei die erste Dimension die Schwierigkeit und die zweite die Auswahl an Fragen angibt) gefüllt wird:
 \begin{java*}[morekeywords={[4]{SUPER\_EASY,ANSWER\_A}},add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]
 question_pool[SUPER_EASY][0] = new A34_Question(
-    "Sind Enten knuffig?", 
+    "Sind Enten knuffig?",
     new String[] {
         "Aber natürlich",        /* Antwort A */
         "Niemals",               /* Antwort B */
         "Nur Freitag",           /* Antwort C */
         "Hat wer Timo gesehen?", /* Antwort D */
-    }, A34_Question.ANSWER_A // <- die richige
+    }, A34_Question.ANSWER_A // <- die richtige
 );
 \end{java*}
     Wir iterieren nun also über die fünf Schwierigkeitsstufen des Pools und wählen jeweils eine
     zufällige Frage aus dem Pool. Für diese Frage wird dann \bjava[add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]{askQuestion(A34_Question,int)} aufgerufen. Hier wird die Frage zum einen Ausgegeben und zum anderen die Eingabe des Nutzers verarbeitet. Die Hauptsächliche Fallunterscheidung auf Basis der Nutzereingabe erfolgt also über ein großes \bjava{switch-case}, das wie folgt aufgebaut ist:
 \begin{java}[firstnumber=106,add to literate={A34_Question}{{\solGet{keywordC}{A34\_Question}}}{11}]]
-public static boolean handleInput(char input, int level, 
+public static boolean handleInput(char input, int level,
                                   A34_Question question) {
     switch (input) {
         // Antwort
@@ -556,7 +556,7 @@ public static boolean handleInput(char input, int level,
             System.out.println("Beende Spiel. Quack.");
             System.exit(0);
         default:
-            System.out.println("Die Eingabe '" + input + 
+            System.out.println("Die Eingabe '" + input +
                                "' ist mir leider unbekannt.");
             return false;
     }
@@ -592,13 +592,13 @@ angegeben werden). Allerdings sollten mindestens Schriftarten mit den folgenden 
     \item Die Zeichen besitzen eine unterschiedliche Höhe
     \item Die Zeichen die die Schriftart ausmachen sollen zufällig generiert werden. Ein Beispiel mit $a$:
 \begin{plainjava}
- .oxlQH   
-/   ÜRMb  
+ .oxlQH
+/   ÜRMb
 |plain| dl0F"LI  |plain|
-tPg  YCM  
- <!y8bmIs 
+tPg  YCM
+ <!y8bmIs
 \end{plainjava}
-\end{itemize} 
+\end{itemize}
 \textit{Hinweis: Solche Generatoren existieren bereits im Internet, wer also besonders Tippfaul ist, kann sich einfach die Zeichen von ihnen nehmen und verwenden. Wer eine kleine Herausforderung möchte, kann die Schriften in Dateien mit Namen \say{\bvoid{:lan:Schriftart:ran:.font}} ablegen und dann vom Programm dynamisch laden lassen \Winkey. Folgendes Beispiel zeigt exemplarisch, wie man eine Datei in Java auslesen kann:}
 \begin{java}
 import java.io.FileReader;
@@ -642,7 +642,7 @@ Das ominöse \bjava{try-catch}-Konstrukt wird später in der Vorlesung noch aufg
     \paragraph{Das Laden einer Schriftart:}
     \bgroup
     \lstset{add to literate={A35_Character}{{\solGet{keywordC}{A35\_Character}}}{12} {A35_Font}{{\solGet{keywordC}{A35\_Font}}}{9}}
-        Die Klasse \bjava{A35_Character} definert ein Zeichen, welches sich durch zwei
+        Die Klasse \bjava{A35_Character} definiert ein Zeichen, welches sich durch zwei
         Attribute auszeichnet:
         \begin{itemize}[nolistsep]
             \item \bjava{char character}: definiert das Zeichen welches vom zugehörigen Schriftzeichen repräsentiert wird.
@@ -665,7 +665,7 @@ Nun lesen wir also die Daten für die Schriftzeichen ein:
 \begin{java}[firstnumber=75]
 A35_Character[] font = new A35_Character[count];
 for(int i = 0; i < count ; i++){// Die Zeichen
-    // Die erste Zeile gibt an welches Zeichen es ist: 
+    // Die erste Zeile gibt an welches Zeichen es ist:
     char font_char = chars[i];
     String[] font_data = new String[this.char_height];
     for(int j = 0; j < this.char_height; j++){// Die Zeilen eines Zeichens
@@ -699,13 +699,13 @@ for (int line = 0; line < font.getCharHeight(); line++) {
         if(the_char == null) { // gibbet nicht
             System.err.format("Das Zeichen '%c' wird von der Schriftart '%s' nicht geliefert!%n", input_chars[i], fontName);
             System.exit(1);
-        } 
+        }
         System.out.print(the_char.getLine(line));
     }
     System.out.println(); // new line
 }
 \end{java}
-    Wir iterieren also einfach über die Höhe der Schriftart und dann über jede Zeile der Zeichen die eingegeben wurden. Als weitere Aufgabe kann man versucehn mehrzeilige Ausgaben zu unterstützten.\par{}
+    Wir iterieren also einfach über die Höhe der Schriftart und dann über jede Zeile der Zeichen die eingegeben wurden. Als weitere Aufgabe kann man versuchen mehrzeilige Ausgaben zu unterstützten.\par{}
     \textit{Hinweis zur Lösung:} Die Lösung erlaubt es direkt über die Kommandozeile den Text zu formatieren. So genügt (wenn die Schriftart \T{test.font} im selben Verzeichnis vorliegt): \cjava[morekeywords={java}]{java A35_ASCII test "HALLO WELT"}\,. Zuerst schreiben wir also dne Namen der Schriftart und dann den Text, den wir angezeigt bekommen möchten.
     \egroup
 \end{solution}
@@ -781,7 +781,7 @@ Bevor wir uns damit beschäftigen möchten, wie die KI selbst funktioniert, woll
                     \sX{7} & \sX{8} & \sX{9}
                 \end{tabular}
             };
-            \ifnum\i=5 
+            \ifnum\i=5
                 \draw[rounded corners] (0.south) -- (\i.north) node[above right,font=\footnotesize] {\i};
             \else %
                 \pgfmathsetmacro\xoffset{abs(\i-5)/2.25}
@@ -811,7 +811,7 @@ Simpel gesagt schlüsselt der Spielbaum also einfach nur alle Möglichkeiten auf
                     O & \sX{8} & \sX{9}
                 \end{tabular}
             };
-            \ifnum\i=5 
+            \ifnum\i=5
                 \draw[rounded corners] (0.south) -- (\i.north) node[above right,font=\footnotesize] {\i};
             \else %
                 \pgfmathsetmacro\xoffset{abs(\xi-2.5)/2.25}
@@ -822,7 +822,7 @@ Simpel gesagt schlüsselt der Spielbaum also einfach nur alle Möglichkeiten auf
             \def\sX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@cs!15!white}{X}\else##1\fi}
             \def\dX##1{\ifnum\i=##1 \bfseries X\else X\fi}
             \def\dsX##1{\ifnum\i=##1 \cellcolor{sob@col@uulm@akzent!25!white}{\bfseries X}\else##1\fi}
-                
+
             \node (l\i) at(2.5*\xi,-7) {
                 \begin{tabular}{c|c|c}
                     \dX{2} & \dsX{2} & \dX{2} \\\hline
@@ -861,8 +861,8 @@ private int evaluate(){
         case CIRCLE: return 1;
         default:
             if(board.isNotFull()) // Können noch ziehen
-                return (turn==A36_State.CIRCLE) ? 
-                            searchGreatestChilds() : 
+                return (turn==A36_State.CIRCLE) ?
+                            searchGreatestChilds() :
                             searchSmallestChilds();
             else // Unentschieden.
                 return 0;
@@ -870,7 +870,7 @@ private int evaluate(){
 }
 \end{java}
 Aber moooment, hier passiert nun wieder eine ganze Menge! Wir prüfen im Startknoten also folgendes: \say{Gibt es einen Sieger?} Wenn ja ist ja nicht nur das Propagieren nicht nötig, sondern wir können auch gleich abschließen, da ja ohnehin nicht weitergespielt wird. Wir weißen dem Knoten nun also einen festen Wert zu, je nachdem wer gewinnt. Ob das nun \(-42\) und \(42\) ist oder eben wie hier \(-1\) und \(1\) spielt keine Rolle. Es empfiehlt sich lediglich zwei verschiedene Werte zu nehmen (sonst suchen wir ja einfach nur den Knoten wo jemand gewinnt).\par{}
-So weit so gut, aber das Spannende geschieht nun, wenn weder Kreuz noch Kreis gewonnen hat. In diesem Fall müssen 
+So weit so gut, aber das Spannende geschieht nun, wenn weder Kreuz noch Kreis gewonnen hat. In diesem Fall müssen
 wir natürlich noch überprüfen ob ein Unentschieden vorliegt. Ist dies der Fall so entscheiden wir uns für ein \say{neutrales} Element und liefern hier die \(0\) zurück; wenn aber kein Unentschieden vorliegt müssen wir uns die Kindknoten betrachten und hier tritt dann die Mechanik auf, die dem minmax-Algorithmus, den wir hier brav anwenden werden, ihren Namen gibt.\par{}
 Denn was ganz Klar ist: wenn wir Kreis sind und Kreis bei einem Sieg mit dem Wert \(1\) versehen wird, so versuchen wir unsere Gewinnwahrscheinlichkeit zu maximieren, wählen also den Kindknoten mit dem höchsten Wert. Für den Gegner wissen wir aber nicht was er wählen wird, vermutlich ist es allerdings sein Ziel ebenfalls zu Gewinnen (und sonst wäre das ja noch besser für uns \Laughey) wir müssen also in den Knoten wo er am Zug ist, das Kind mit der niedrigsten Bewertung auswählen, da dieses natürlich vom Gegenspieler favorisiert wird. Und so ergibt sich auch die letzte Unterscheidung: Sind wir am Zug (also im Kontext des Spielbaums), so wählen wir den für uns besten (max) Zug, der Knoten erhält also das Gewicht des für uns besten Kindzweiges, analog anders herum: Ist der Gegner am Zug so wählen wir den Kindknoten mit der niedrigsten Bewertung (min): Tadaa! MinMax, oder in der Reihenfolge hier: MaxMin hihi\Laughey!\par{}
 Die Suchmethode könnten wir übrigens wie folgt veranschaulichen:
@@ -893,7 +893,7 @@ Für Spiele wie Schach, Mühle oder eben TicTacToe ist es ein leichtes gigantisc
 \begin{itemize}[nolistsep]
     \item Spielfelder die durch Drehung oder Spiegelungen in die gleiche Form umgewandelt werden können lassen sich ebenfalls vereinfachen. So lässt sich die Anzahl der gültigen Endstellungen ebenfalls massiv reduzieren.
     \item Berechnet man die Bewertungen direkt beim Aufbau des Baumes, so kann man unter Umständen hier schon Zweige abschneiden. Hat man zum Beispiel schon einen Kindknoten mit maximal möglicher Bewertung berechnet (hier also zum Beispiel \(1\)) und wir befinden uns in einem \emph{max}-Schritt, so braucht man keinen der anderen Zweige berechnen da sie ja nicht besser sein können.
-    \item Unter Berücksichtigung der Tiefe kann man mit weiteren Spielbezogenen Maßzahlen (zum Beispiel Spiel so schnell wie möglich beenden) die Anzahl der Zweige verringern. 
+    \item Unter Berücksichtigung der Tiefe kann man mit weiteren Spielbezogenen Maßzahlen (zum Beispiel Spiel so schnell wie möglich beenden) die Anzahl der Zweige verringern.
     \item Beginnt zum Beispiel die KI, oder ist die Anzahl der Optionen überschaubar, so kann der Spielbaum auch erst ab dem dritten Zug für die aktuelle Feldkonstellation berechnet werden, da zuvor noch simple Regeln oder Schemata ausreichen.
 \end{itemize}
 Es lohnt sich, das mal zu probieren, zum Beispiel für das Spiel Vier-Gewinnt \Smiley.
@@ -984,7 +984,7 @@ Peter Erika   Wolfgang Rosalinde
         Für die Funktionalität der letzten Methode fügen wir noch eine \bjava{equals()}-Methode in \bjava{A38_Ente} an. Auf sie wollen wir hier auch nicht weiter eingehen. \notetext{Übrigens: Eine solche Listenimplementation muss natürlich nicht für jeden Datentyp geschrieben werden. Java bietet hierfür das Prinzip der \say{Generics} an, bei dem man einen Platzhalterdatentyp definiert, der dann in der Liste verwaltet wird. Über \say{Interfaces} kann dann geregelt werden, welche Schnittstellen dieser Datentyp bieten muss - so funktioniert übrigens auch das Iterieren mittels Javas \say{foreach}. Hierfür wird das \solGet{keywordC}{iterable}-Keyword benötigt!}
 
         \paragraph{Den Stammbaum ausgeben:}
-        Nun möchten wir den Stammbaum ausgeben. Hier treffen wir die Annahme, dass eine Ente entweder beide Elternteile besitzt, oder keinen. Weiter geht diese Lösung davon aus, dass die Zweige des jeweiligen Elterneteils ebenfalls ausbalanciert sind. Dies lässt sich sehr leicht ändern (in dem man zum Beispiel für jede Ente speichert, in welcher Generation sie lebt), soll aber hier nicht unser Problem sein. Wir wollen uns nur ansehen wie wir den Stammbaum \say{traveriseren} also durchlaufen können. So dass wir zu Ende jedes Element besucht haben. Umgesetzt wurde dies hier durch einen nicht-rekursiven Ansatz, der grob folgendem Ansatz folgt:
+        Nun möchten wir den Stammbaum ausgeben. Hier treffen wir die Annahme, dass eine Ente entweder beide Elternteile besitzt, oder keinen. Weiter geht diese Lösung davon aus, dass die Zweige des jeweiligen Elternteils ebenfalls ausbalanciert sind. Dies lässt sich sehr leicht ändern (in dem man zum Beispiel für jede Ente speichert, in welcher Generation sie lebt), soll aber hier nicht unser Problem sein. Wir wollen uns nur ansehen wie wir den Stammbaum \say{traveriseren} also durchlaufen können. So dass wir zu Ende jedes Element besucht haben. Umgesetzt wurde dies hier durch einen nicht-rekursiven Ansatz, der grob folgendem Ansatz folgt:
         \begin{enumerate}[nolistsep]
             \item Füge die Startente der Durchsuchliste hinzu.
             \item \label{enum:duckstp2}Entferne die erste Ente aus der Durchsuchliste und füge sie der Ausgabeliste hinzu.
@@ -1078,7 +1078,7 @@ System.out.println("\033[35mHallo\033[0m Welt");
 \say{Hallo} in Magenta (eine Konsole kann die Farben anders belegen) und \say{Welt} in normalem Text setzen.
 \paragraph{Ohne ANSI-Escape-Codes:}
 Sollte dies nicht auf Anhieb/oder auch durch Nachfragen nicht funktionieren, oder einfach nicht gewünscht sein, so lässt sich die Aufgabe natürlich auch ohne diese Umsetzen.
-Dann sollte man aber zumindest ein paar Leerzeilen zwischen die jeweiligen Züge packen, 
+Dann sollte man aber zumindest ein paar Leerzeilen zwischen die jeweiligen Züge packen,
 damit man die jeweiligen Zustände gut voneinander trennen kann.
 
 \paragraph{Anforderungen:}
