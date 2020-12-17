@@ -200,13 +200,13 @@ Schreibe für jede der folgenden Anforderungen eine Funktion, die eine Zahl als 
         \item Dezimal in römische Zahlenschrift.
     \end{enumerate}
 \end{multicols}\vspace*{-0.75\baselineskip}\par
-Die Option für \say{von römischer Zahlen ins Dezimalsystem} ist freiwillig. \textit{Hinweis: Die Darstellung einer Zahl im Binär-, Okal- oder Hexadezimal System erfolgt analog zum Dezimalsystem, wobei für jede Ziffer entweder zwei, acht oder sechzehn Symbole zur Verfügung stehen. Die Wertigkeit ist hierbei für jede Ziffer: \T{Ziffer * Basis\^{}Stelle}.
+Die Option für \say{von römischer Zahlen ins Dezimalsystem} ist freiwillig. \textit{Hinweis: Die Darstellung einer Zahl im Binär-, Oktal- oder Hexadezimal-System erfolgt analog zum Dezimalsystem, wobei für jede Ziffer entweder zwei, acht oder sechzehn Symbole zur Verfügung stehen. Die Wertigkeit ist hierbei für jede Ziffer: \T{Ziffer * Basis\^{}Stelle}.
 So ist zum Beispiel $42_{10}$: \begin{itemize}[nolistsep]
     \item im Binärsystem $101010_{2}$, da: $\impmath{1} \cdot 2^5 + \impmath{0} \cdot 2^4 + \impmath{1} \cdot 2^3 + \impmath{0} \cdot 2^2 + \impmath{1} \cdot 2^1 + \impmath{0} \cdot 2^0 = 42_{10}$.
     \item im Oktalsystem $52_8$, da: $\impmath{5} \cdot 8^1 + \impmath{2} \cdot 8^0 = 42_{10}$.
     \item im Hexadezimalsystem $2A_{16}$, da: $\impmath{2} \cdot 16^1 + \impmath{10} \cdot 8^0 = 42_{10}$. Hinweis, die Ziffernwerte $10$ bis $15$ werden durch die Buchstaben $A$ bis $F$ gekennzeichnet (so entspricht $A\widehat{=}10,\,B\widehat{=}11,\,\ldots,\,F\widehat{=}15$)
 \end{itemize}
-Das römische System verwendet Zahlzeichen für die Darstellung bestimmter numerischer Werte, so repräsentiert \T{I} eine $1$, \T{V} den Wert $5$, \T{X} den Wert $10$, \T{L} den Wert $50$, \T{C} den Wert $100$, \T{D} den Wert $500$ und \T{M} den Wert $1000$. Die einzelnen Werte der Symbole werden summiert, wobei sie positiv gewertet werden, wenn sie in ihrer Wertigkeit absteigend notiert sind und negativ wenn ein Symbol niederern Wertes vor einem mit höheren Wert steht. So ist: \foreach \i in {1,...,10} {$\i_{10}$ = \rom{\i},~} und $42_{10}$ zum Beispiel: ${X}{V}{I}{I} = \underset{X}{(-10)} + \underset{V}{50} + \underset{I}{1} + \underset{I}{1} = 42_{10}$.
+Das römische System verwendet Zahlzeichen für die Darstellung bestimmter numerischer Werte, so repräsentiert \T{I} eine $1$, \T{V} den Wert $5$, \T{X} den Wert $10$, \T{L} den Wert $50$, \T{C} den Wert $100$, \T{D} den Wert $500$ und \T{M} den Wert $1000$. Die einzelnen Werte der Symbole werden summiert, wobei sie positiv gewertet werden, wenn sie in ihrer Wertigkeit absteigend notiert sind und negativ wenn ein Symbol niederen Wertes vor einem mit höheren Wert steht. So ist: \foreach \i in {1,...,10} {$\i_{10}$ = \rom{\i},~} und $42_{10}$ zum Beispiel: ${X}{V}{I}{I} = \underset{X}{(-10)} + \underset{V}{50} + \underset{I}{1} + \underset{I}{1} = 42_{10}$.
 }
 
 \begin{solution}
@@ -246,11 +246,11 @@ public static String fromDecToRom(int A){
     return result;
 }
 \end{java}
-    Die normale Konvertierung gestaltet sich als recht einfach, wir konkatennieren jeweils den ganzzahligen Rest der Division durch die Basis an die Zeichenkette heran. So wie es das Konvertieren durch Division diktiert:
+    Die normale Konvertierung gestaltet sich als recht einfach, wir konkatenieren jeweils den ganzzahligen Rest der Division durch die Basis an die Zeichenkette heran. So wie es das Konvertieren durch Division diktiert:
 \begin{java}[firstnumber=81,morekeywords={[4]{ROM}}]
 public static String fromDecToB(int A, int baseB){
     if(baseB == ROM /* = -1 */ ) return fromDecToRom(A);
-    // Teile A sukzessiv durch base B und konkatiniere Reste
+    // Teile A sukzessiv durch base B und konkateniere Reste
     String result = "";
     int remainder = 0;
     while(A > 0) { // Es gibt noch was zu teilen
@@ -386,13 +386,13 @@ public static String turing(String befehl) {
     for(int i = 0; i < band.length; i++)
         band[i] = 'a';
 
-    int kopf = 0; // Initilaisiere Kopf
+    int kopf = 0; // Initialisiere Kopf
     String output = ""; // Speichere Ausgabe
 
     //jetzt wird der als String übergebene Befehl ausgeführt
     for(int i = 0; i < befehl.length(); i++){
         switch(befehl.charAt(i)){
-            // wenn am Rand des Bandes: stetze Kopf auf das Ende
+            // wenn am Rand des Bandes: setze Kopf auf das Ende
             case '<': kopf = (kopf == 0) ? band.length-1 : kopf-1; break;
             // wenn am Rand des Bandes: setze Kopf auf den Anfang
             case '>': kopf = (kopf == band.length-1) ? 0 : kopf+1; break;
@@ -499,7 +499,7 @@ private String questionText;
 private String[] answers;
 private int correctAnswer;
 \end{java}
-    Sie definiert sich also durch den eigentlichen Fragetext (\bjava{String}), vier verschiedene Antwortmöglichkeiten (\bjava{String[]}) und eine richtige Antwort (\bjava{int}). Natürlich handelt es sich hier nur um eine einfache, geradzu naive Herangehensweise an eine Frage, sie reicht aber im Kontext der Bearbeitung dieser Aufgabe durchaus aus. Interessant ist noch die \bjava{toString()}-Methode, die die Fragen-Klasse überlädt:
+    Sie definiert sich also durch den eigentlichen Fragetext (\bjava{String}), vier verschiedene Antwortmöglichkeiten (\bjava{String[]}) und eine richtige Antwort (\bjava{int}). Natürlich handelt es sich hier nur um eine einfache, geradezu naive Herangehensweise an eine Frage, sie reicht aber im Kontext der Bearbeitung dieser Aufgabe durchaus aus. Interessant ist noch die \bjava{toString()}-Methode, die die Fragen-Klasse überlädt:
 \begin{java}[firstnumber=96]
 public String toString(){
     String question = this.getQuestionText();
@@ -528,7 +528,7 @@ question_pool[SUPER_EASY][0] = new A34_Question(
         "Niemals",               /* Antwort B */
         "Nur Freitag",           /* Antwort C */
         "Hat wer Timo gesehen?", /* Antwort D */
-    }, A34_Question.ANSWER_A // <- die richige
+    }, A34_Question.ANSWER_A // <- die richtige
 );
 \end{java*}
     Wir iterieren nun also über die fünf Schwierigkeitsstufen des Pools und wählen jeweils eine
@@ -641,7 +641,7 @@ Das ominöse \bjava{try-catch}-Konstrukt wird später in der Vorlesung noch aufg
     \paragraph{Das Laden einer Schriftart:}
     \bgroup
     \lstset{add to literate={A35_Character}{{\solGet{keywordC}{A35\_Character}}}{12} {A35_Font}{{\solGet{keywordC}{A35\_Font}}}{9}}
-        Die Klasse \bjava{A35_Character} definert ein Zeichen, welches sich durch zwei
+        Die Klasse \bjava{A35_Character} definiert ein Zeichen, welches sich durch zwei
         Attribute auszeichnet:
         \begin{itemize}[nolistsep]
             \item \bjava{char character}: definiert das Zeichen welches vom zugehörigen Schriftzeichen repräsentiert wird.
@@ -704,7 +704,7 @@ for (int line = 0; line < font.getCharHeight(); line++) {
     System.out.println(); // new line
 }
 \end{java}
-    Wir iterieren also einfach über die Höhe der Schriftart und dann über jede Zeile der Zeichen die eingegeben wurden. Als weitere Aufgabe kann man versucehn mehrzeilige Ausgaben zu unterstützten.\par{}
+    Wir iterieren also einfach über die Höhe der Schriftart und dann über jede Zeile der Zeichen die eingegeben wurden. Als weitere Aufgabe kann man versuchen mehrzeilige Ausgaben zu unterstützten.\par{}
     \textit{Hinweis zur Lösung:} Die Lösung erlaubt es direkt über die Kommandozeile den Text zu formatieren. So genügt (wenn die Schriftart \T{test.font} im selben Verzeichnis vorliegt): \cjava[morekeywords={java}]{java A35_ASCII test "HALLO WELT"}\,. Zuerst schreiben wir also dne Namen der Schriftart und dann den Text, den wir angezeigt bekommen möchten.
     \egroup
 \end{solution}
@@ -983,7 +983,7 @@ Peter Erika   Wolfgang Rosalinde
         Für die Funktionalität der letzten Methode fügen wir noch eine \bjava{equals()}-Methode in \bjava{A38_Ente} an. Auf sie wollen wir hier auch nicht weiter eingehen. \notetext{Übrigens: Eine solche Listenimplementation muss natürlich nicht für jeden Datentyp geschrieben werden. Java bietet hierfür das Prinzip der \say{Generics} an, bei dem man einen Platzhalterdatentyp definiert, der dann in der Liste verwaltet wird. Über \say{Interfaces} kann dann geregelt werden, welche Schnittstellen dieser Datentyp bieten muss - so funktioniert übrigens auch das Iterieren mittels Javas \say{foreach}. Hierfür wird das \solGet{keywordC}{iterable}-Keyword benötigt!}
 
         \paragraph{Den Stammbaum ausgeben:}
-        Nun möchten wir den Stammbaum ausgeben. Hier treffen wir die Annahme, dass eine Ente entweder beide Elternteile besitzt, oder keinen. Weiter geht diese Lösung davon aus, dass die Zweige des jeweiligen Elterneteils ebenfalls ausbalanciert sind. Dies lässt sich sehr leicht ändern (in dem man zum Beispiel für jede Ente speichert, in welcher Generation sie lebt), soll aber hier nicht unser Problem sein. Wir wollen uns nur ansehen wie wir den Stammbaum \say{traveriseren} also durchlaufen können. So dass wir zu Ende jedes Element besucht haben. Umgesetzt wurde dies hier durch einen nicht-rekursiven Ansatz, der grob folgendem Ansatz folgt:
+        Nun möchten wir den Stammbaum ausgeben. Hier treffen wir die Annahme, dass eine Ente entweder beide Elternteile besitzt, oder keinen. Weiter geht diese Lösung davon aus, dass die Zweige des jeweiligen Elternteils ebenfalls ausbalanciert sind. Dies lässt sich sehr leicht ändern (in dem man zum Beispiel für jede Ente speichert, in welcher Generation sie lebt), soll aber hier nicht unser Problem sein. Wir wollen uns nur ansehen wie wir den Stammbaum \say{traveriseren} also durchlaufen können. So dass wir zu Ende jedes Element besucht haben. Umgesetzt wurde dies hier durch einen nicht-rekursiven Ansatz, der grob folgendem Ansatz folgt:
         \begin{enumerate}[nolistsep]
             \item Füge die Startente der Durchsuchliste hinzu.
             \item \label{enum:duckstp2}Entferne die erste Ente aus der Durchsuchliste und füge sie der Ausgabeliste hinzu.
@@ -1058,7 +1058,7 @@ Die folgende Aufgabe ist in ihrer Natur komplexer und benötigt zumindest grundl
 werden, es geht um ein zwei Spieler-Schach welches es ermöglicht zwei Personen an einer
 Konsole gegeneinander Schach zu spielen. Zur optischen Aufbereitung können die im Folgenden nahegelegten ANSI-Escape-Codes Verwendung finden:}\par
 \paragraph{Mit ANSI-Escape-Codes:}
-Für den folgenden Teil kann es nützlich/hilfreich sein ANSI-Escape Sequenzen zu kennen. Diese müssen auf Windows-Distributionen unter Umständen noch aktiviert werden wobei dies mit Windows $10$ nur noch ein Klick in eine Box getan sein sollte\footnote{\url{https://stackoverflow.com/questions/16755142/how-to-make-win32-console-recognize-ansi-vt100-escape-sequences\#16799175}}.\par{}
+Für den folgenden Teil kann es nützlich/hilfreich sein ANSI-Escape Sequenzen zu kennen. Diese müssen auf Windows-Distributionen unter Umständen noch aktiviert werden wobei dies mit Windows 10 nur noch ein Klick in eine Box getan sein sollte\footnote{\url{https://stackoverflow.com/questions/16755142/how-to-make-win32-console-recognize-ansi-vt100-escape-sequences\#16799175}}.\par{}
 Grundlegend handelt es sich bei einer ANSI-Escape Sequenz um eine durch \bjava{\\033[}
 angeführte Kontrollsequenz an der die anschließende Kodierung eine besondere Bedeutung im
 Terminal erhält. Eine volle Liste findet sich hier: \url{https://en.wikipedia.org/wiki/ANSI_escape_code}, vermutlich werden allerdings die Folgenden ausreichen:
